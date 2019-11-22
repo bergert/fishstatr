@@ -38,3 +38,6 @@ rsconnect/
 
 # development notes
 *.txt
+
+# ebx connection details
+ebx5_connection.yaml

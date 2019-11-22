@@ -11,7 +11,7 @@
 #'
 #' @return grouping in the format int=parent list=(child1,child2, child3...)
 #'
-#' @importFrom dplyr group_by group_map
+#' @importFrom dplyr group_by group_map ungroup
 #' @importFrom data.table data.table
 #' @export
 #'
@@ -38,7 +38,7 @@ GroupAsList <- function(grouping) {
   #-- second: convert all children to a list
   df2 <- df1 %>% group_map(~convert2List(.x[2]))
 
-  return (df2 %>% ungroup)
+  return (df2 %>% ungroup())
 }
 
 convert2List <- function(values) {

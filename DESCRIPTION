@@ -1,7 +1,7 @@
 Package: fishstatr
 Type: Package
 Title: fishstatr: an R package to access fishstat reference data from EBX5
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(
     person("Thomas", "Berger", email = "thomas.berger@fao.org",  role = c("aut", "cre")),
     person("Luis G.", "Silva e Silva", email = "luis.silvaesilva@fao.org",  role = c("aut")))
@@ -10,6 +10,7 @@ License: GPL-3 + file LICENSE
 LazyData: true
 Imports:
     faoebx5,
+    dplyr,
     data.table
 Suggests:
     knitr,

@@ -15,7 +15,11 @@
 #' @examples
 #'
 #' \dontrun{
-#' GetCodelistByID(200)
+#' country_codelist_ID <- 200 # the ID for CL_FI_COUNTRY_ITEM
+#' cl <- GetCodelistByID(country_codelist_ID)
+#'
+#' # same as
+#' cl <- ReadEBXCodeList('CL_FI_COUNTRY_ITEM')
 #' }
 #'
 #' @export
@@ -27,9 +31,10 @@ GetCodelistByID <- function(ebxCodeListID) {
     stop('EBX5 data strcuture is not loaded')
   }
 
-  df <- ebx5.cl_data[ebx5.cl_data$Identifier == ebxCodeListID,'Acronym']
-  df <- df %>% droplevels()
+  if (nrow(ebx5.cl_data[ebx5.cl_data$Identifier == ebxCodeListID,]) == 0) {
+    stop('ebxCodeListID <',ebxCodeListID,'> is not defined in EBXCodelist metadata')
+  }
 
-  ebxCodelistName <- as.character(df$Acronym)
+  ebxCodelistName <- ebx5.cl_data[ebx5.cl_data$Identifier == ebxCodeListID,'Acronym']
   return(ReadEBXCodeList(ebxCodelistName))
 }
