@@ -30,7 +30,7 @@ ReadEBXHierarchy(306,301)
 
 }
 \seealso{
-\code{\link{GetDimensionGroups}} and \code{\link{GetDimensions}}.
+\code{\link{GetDimensionGroups}} and \code{\link{GetDatasetDimensions}}.
 }
 \author{
 Thomas Berger, \email{thomas.berger@fao.org}

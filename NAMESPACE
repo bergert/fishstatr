@@ -3,7 +3,6 @@
 export(GetCodelistByID)
 export(GetDatasetDimensions)
 export(GetDatasets)
-export(GetDimensionGroupData)
 export(GetDimensionGroups)
 export(GetGroupConnections)
 export(GroupAsList)

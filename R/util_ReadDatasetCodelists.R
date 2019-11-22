@@ -1,4 +1,4 @@
-#' @title Read a comple group hierarchy, for use with applications
+#' @title Read a complete group hierarchy, for use with applications
 #'
 #' @param metadata FishStat metadata; obtained using \code{\link{ReadMetadata}}
 #' @param datasetID dataset Identifier obtained using \code{\link{GetDatasets}}
@@ -10,11 +10,9 @@
 #' @details It first calls \code{\link{GetDatasetDimensions}} to obtain the dimensions for
 #' the dataset. For each of the dimensions, calls \code{\link{GetDimensionGroups}} to
 #' obtain the hierarchies for this dimension. Finally calls \code{\link{ReadEBXHierarchy}}
-#' to obtain the grouping from the bottom hierachy (as specified in GetDatasetDimensions) to the
+#' to obtain the grouping from the bottom hierarchy (as specified in GetDatasetDimensions) to the
 #' top (as specified in GetDimensionGroups).
-#'
-#'
-#' @return grouping in the format int=parent list=(child1,child2,child3...)
+#' It saves all objects into an RData file with the name of the dataset.
 #'
 #' @importFrom dplyr group_by group_map
 #' @importFrom data.table data.table
@@ -23,6 +21,7 @@
 #'
 #' @examples
 #' \dontrun{
+#'  library(faoebx5)
 #'  library(fishstatr)
 #'  #use row1 for this example
 #'  datasetID <- GetDatasets(metadata)[1,'Identifier']
@@ -53,37 +52,37 @@ ReadDatasetCodelists <- function(metadata, datasetID) {
     stop('metadata is not valid for FishStat')
   }
 
-  objectlist <- c()
+  objectlist <- c('Dimensions')
   datasetName <- metadata$Dataset[metadata$Dataset$Identifier==datasetID,'Acronym']
-  dimensions <- GetDatasetDimensions(metadata, datasetID)
-  for (dimRow in 1:nrow(dimensions)) {
-    dimName <- dimensions[dimRow]$Acronym
+  Dimensions <- GetDatasetDimensions(metadata, datasetID)
+  for (dimRow in 1:nrow(Dimensions)) {
+    dimName <- Dimensions[dimRow]$Acronym
 
     # create the Country.Codelist
     assign(paste0(dimName,'.Codelist'), GetCodelistByID(dimensions[dimRow]$EBXCodelist))
     objectlist <- c(objectlist, paste0(dimName,'.Codelist'))
-    print(paste0('=',dimName,'.Codelist ID=',dimensions[dimRow]$EBXCodelist))
+    print(paste0('=',dimName,'.Codelist ID=',Dimensions[dimRow]$EBXCodelist))
 
     # create Country.Groups
-    if (nrow(metadata$Relation[metadata$Relation$ConceptChild == dimensions[dimRow]$ConceptID,]) == 0) {
+    if (nrow(metadata$Relation[metadata$Relation$ConceptChild == Dimensions[dimRow]$ConceptID,]) == 0) {
       # create empty
       assign(paste0(dimName,'.Groups'), data.table())
       objectlist <- c(objectlist, paste0(dimName,'.Groups'))
     }
     else {
-      assign(paste0(dimName,'.Groups'), GetDimensionGroups(metadata, dimensions[dimRow]$ConceptID))
+      assign(paste0(dimName,'.Groups'), GetDimensionGroups(metadata, Dimensions[dimRow]$ConceptID))
       objectlist <- c(objectlist, paste0(dimName,'.Groups'))
-      print(paste0('=',dimName,'.Groups ID=',dimensions[dimRow]$ConceptID))
+      print(paste0('=',dimName,'.Groups ID=',Dimensions[dimRow]$ConceptID))
 
       # create Country.Hierarchies
       hierarchies <- get(paste0(dimName,'.Groups'))
       for (hierRow in 1:nrow(hierarchies)) {
-        hierarchy <- ReadEBXHierarchy(hierarchies[hierRow,'EBXCodelist'], dimensions[dimRow]$EBXCodelist)
+        hierarchy <- ReadEBXHierarchy(hierarchies[hierRow,'EBXCodelist'], Dimensions[dimRow]$EBXCodelist)
         hierName <- paste0(dimName,'.Groups.',hierarchies[hierRow,'Acronym'])
-        print(paste0('=',hierName,' ID=',hierarchies[hierRow,'EBXCodelist'],'->',dimensions[dimRow]$EBXCodelist))
+        print(paste0('=',hierName,' ID=',hierarchies[hierRow,'EBXCodelist'],'->',Dimensions[dimRow]$EBXCodelist))
         if (nrow(hierarchy) == 0) {
           stop(paste('hierarchy ',hierName,' ID=', hierarchies[hierRow,'EBXCodelist'],'->',
-                     dimensions[dimRow]$EBXCodelist),' does not have any data')
+                     Dimensions[dimRow]$EBXCodelist),' does not have any data')
         }
         assign(hierName, hierarchy)
         objectlist <- c(objectlist,hierName)

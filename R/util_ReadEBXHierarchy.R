@@ -3,7 +3,7 @@
 #' @param sdmx_level1 ID upper level of a hierarchy, as returned by GetDimensionGroups$EBXCodelist
 #' @param sdmx_level2 lower level of a hierarchy, as returned by GetDimensions$EBXCodelist
 #'
-#' @seealso \code{\link{GetDimensionGroups}} and \code{\link{GetDimensions}}.
+#' @seealso \code{\link{GetDimensionGroups}} and \code{\link{GetDatasetDimensions}}.
 #'
 #' @description This function will resolve all possible groupings, accross multiple levels,
 #'  combining these levels into the final result. In case there are multiple group paths
