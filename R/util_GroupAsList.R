@@ -6,12 +6,13 @@
 #'
 #' @description This function will merge the child ID's belonging to a single parent ID
 #'
-#' @details Required, to use EBX5 groups in applications, and also to resolve relationships of
-#'  multi-level hierarchies.
+#' @details This is a wicked use of \code{\link[magrittr]{"%>%"}} to reformat a grouping in a
+#' way to use groups in applications.
 #'
 #' @return grouping in the format int=parent list=(child1,child2, child3...)
 #'
 #' @importFrom dplyr group_by group_map ungroup
+#' @importFrom magrittr "%>%"
 #' @importFrom data.table data.table
 #' @export
 #'
@@ -24,6 +25,7 @@
 #'    ..$ : num  10 11
 #'    ..$ : num  21 22
 #'
+#' library(faoebx5)
 #' df <- ReadEBXGroup('HCL_FI_COUNTRY_CONTINENT_GEOREGION')
 #' GroupAsList(df)
 #' }

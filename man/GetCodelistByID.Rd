@@ -20,6 +20,9 @@ This function requires that EBX5 metadata was loded already
 \examples{
 
 \dontrun{
+library(faoebx5)
+library(fishstatr)
+ReadMetadata()
 country_codelist_ID <- 200 # the ID for CL_FI_COUNTRY_ITEM
 cl <- GetCodelistByID(country_codelist_ID)
 

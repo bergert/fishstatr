@@ -3,7 +3,7 @@
 #' @description Using the EBX5 metadata, calculates the grouping from parent to child group,
 #' based on codelist Identifier; as defined in 'EBXGroup.to' and 'EBXGroup.from'.
 #' This is a basic function of this package, it is exposed primarily for troubleshooting.
-#' Users will normally use \code{\link{GetEBXHierarchy}}.
+#' Users will normally use \code{\link{ReadEBXHierarchy}} or \code{\link{ReadDatasetCodelists}}.
 #'
 #' @param metadata FishStat metadata; obtained using \code{\link{ReadMetadata}}
 #' @param ebx_parent_group parent, using the EBX5 codelist Identifier
@@ -22,11 +22,13 @@
 #'
 #' @importFrom dplyr group_by group_map
 #' @importFrom data.table data.table
-#' @importFrom faoebx5 ReadEBXGroup
 #' @export
 #'
 #' @examples
 #' \dontrun{
+#' library(faoebx5)
+#' library(fishstatr)
+#' ReadMetadata()
 #' GetGroupConnections(306,301)
 #' [[1]]
 #' [1] "306" "307" "302" "301"
@@ -38,7 +40,7 @@
 GetGroupConnections <- function(ebx_parent_group, ebx_child_group) {
 
    if (!exists("ebx5.gr_data")) {
-     stop('ebx5.gr_data is not loaded; you must run ReadMetadata()')
+     stop('ebx5.gr_data is not loaded; you must run ReadMetadata() first')
    }
 
   if (missing(ebx_parent_group)) {

@@ -19,6 +19,8 @@ from EBX5. It provides a dataset name, and the Dataset-Identifier required by ot
 \examples{
 
 \dontrun{
+library(faoebx5)
+library(fishstatr)
 metadata <- ReadMetadata()
 GetDatasets(metadata)
    Identifier           Acronym                                               Name_En

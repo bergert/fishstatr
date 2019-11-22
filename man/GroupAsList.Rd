@@ -15,10 +15,6 @@ grouping in the format int=parent list=(child1,child2, child3...)
 \description{
 This function will merge the child ID's belonging to a single parent ID
 }
-\details{
-Required, to use EBX5 groups in applications, and also to resolve relationships of
- multi-level hierarchies.
-}
 \examples{
 \dontrun{
 df <- data.frame(group=c(100,100, 200, 200), children=c(10,11,21,22))
@@ -28,6 +24,7 @@ str(GroupAsList(df))
    ..$ : num  10 11
    ..$ : num  21 22
 
+library(faoebx5)
 df <- ReadEBXGroup('HCL_FI_COUNTRY_CONTINENT_GEOREGION')
 GroupAsList(df)
 }

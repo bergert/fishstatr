@@ -22,6 +22,8 @@ aggregation (Continent, Region, ...).
 \examples{
 
 \dontrun{
+library(faoebx5)
+library(fishstatr)
 metadata <- ReadMetadata()
 GetDimensionGroups(metadata, dimensionConceptID = 1)
    Identifier             Acronym Sort EBXCodelist                                Name_En

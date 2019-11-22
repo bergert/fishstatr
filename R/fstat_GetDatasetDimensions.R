@@ -18,6 +18,8 @@
 #' @examples
 #'
 #' \dontrun{
+#' library(faoebx5)
+#' library(fishstatr)
 #' metadata <- ReadMetadata()
 #' GetDatasetDimensions(metadata, datasetID = 1)
 #'    AttributeID ConceptID DimensionID                Name_En EBXCodelist    EBXName

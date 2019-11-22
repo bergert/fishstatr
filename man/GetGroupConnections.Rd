@@ -20,7 +20,7 @@ grouping in the format int=parent list=(child1,child2, child3...)
 Using the EBX5 metadata, calculates the grouping from parent to child group,
 based on codelist Identifier; as defined in 'EBXGroup.to' and 'EBXGroup.from'.
 This is a basic function of this package, it is exposed primarily for troubleshooting.
-Users will normally use \code{\link{GetEBXHierarchy}}.
+Users will normally use \code{\link{ReadEBXHierarchy}} or \code{\link{ReadDatasetCodelists}}.
 }
 \details{
 The solution may invaolve several steps (a list of group ID's), and may involve
@@ -32,6 +32,9 @@ list(ebx_parent_group, ebx_child_group) is returned
 }
 \examples{
 \dontrun{
+library(faoebx5)
+library(fishstatr)
+ReadMetadata()
 GetGroupConnections(306,301)
 [[1]]
 [1] "306" "307" "302" "301"

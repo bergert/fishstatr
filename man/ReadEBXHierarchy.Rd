@@ -2,7 +2,7 @@
 % Please edit documentation in R/util_ReadEBXHierarchy.R
 \name{ReadEBXHierarchy}
 \alias{ReadEBXHierarchy}
-\title{Read a comple group hierarchy}
+\title{Read a complete group hierarchy}
 \usage{
 ReadEBXHierarchy(sdmx_level1_ID, sdmx_level2_ID)
 }
@@ -12,21 +12,33 @@ ReadEBXHierarchy(sdmx_level1_ID, sdmx_level2_ID)
 \item{sdmx_level2}{lower level of a hierarchy, as returned by GetDimensions$EBXCodelist}
 }
 \value{
-grouping in the format int=parent list=(child1,child2,child3...)
+grouping as a \code{\link[data.table]{data.table}} with two columns(parent,child)
 }
 \description{
-This function will resolve all possible groupings, accross multiple levels,
- combining these levels into the final result. In case there are multiple group paths
- between the levels requested, all paths are resolved and combined.
+Is used by \code{\link{ReadDatasetCodelists}}.
 }
 \details{
-The group names are using the EBX5-ID, returned by
+This function calls \code{\link{GetGroupConnections}} to find possible
+grouping solutions accross multiple levels. For each of these levels if reads the
+\code{\link[faoebx5]{ReadEBXGroup}} grouping, combining all levels to a final result.
+In case there are multiple group solutions reported by \code{\link{GetGroupConnections}},
+each solution is combined and the groupings for each solution are merged into the final
+result.
 }
 \examples{
 \dontrun{
-ReadEBXHierarchy(306,301)
+library(faoebx5)
+library(fishstatr)
+ReadMetadata()
+result <- ReadEBXHierarchy(306,301)
+[1] "  parentID=306, childID=307, sdmxGroupName=HCL_FI_SPECIES_MAJOR_ORDER"
+[1] "  parentID=307, childID=302, sdmxGroupName=HCL_FI_SPECIES_ORDER_FAMILY"
+[1] "  parentID=302, childID=301, sdmxGroupName=HCL_FI_SPECIES_FAMILY_ITEM"
+[1] "  parentID=306, childID=307, sdmxGroupName=HCL_FI_SPECIES_MAJOR_ORDER"
+[1] "  parentID=307, childID=301, sdmxGroupName=HCL_FI_SPECIES_ORDER_ITEM"
+nrow(result)
+[1] 12751
 }
-
 
 }
 \seealso{
