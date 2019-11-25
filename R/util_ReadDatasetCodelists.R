@@ -23,25 +23,54 @@
 #' \dontrun{
 #'  library(faoebx5)
 #'  library(fishstatr)
+#'  library(data.table)
 #'  #use row1 for this example
 #'  datasetID <- GetDatasets(metadata)[1,'Identifier']
 #'  datasetName <- GetDatasets(metadata)[1,'Acronym']
 #'
 #'  ReadDatasetCodelists(metadata, datasetID)
-#'  [1] "=== saved 29 to AQUACULTURE.RData, size=349984"
+#'  [1] "=== saved 72 to AQUACULTURE.RData, size=23293352"
 #'
 #'  load(file = paste0(datasetName,'.RData'))
 #'  > ls()
-#' [1] "COUNTRY.Codelist"                   "COUNTRY.Groups"                     "COUNTRY.Groups.CONTINENT"
-#' [4] "COUNTRY.Groups.GEO_REGION"          "COUNTRY.Groups.ECON_CLASS"          "COUNTRY.Groups.ECON_GROUP"
-#' [7] "COUNTRY.Groups.COMMISSION"          "COUNTRY.Groups.ECO_REGION"          "COUNTRY.Groups.OTHER_COUNTRY_GROUP"
-#' [10] "SPECIES.Codelist"                   "SPECIES.Groups"                     "SPECIES.Groups.YEARBOOK_GROUP"
-#' [13] "SPECIES.Groups.ISSCAAP_DIVISION"    "SPECIES.Groups.ISSCAAP_GROUP"       "SPECIES.Groups.MAIN_GROUP"
-#' [16] "SPECIES.Groups.ORDER"               "SPECIES.Groups.FAMILY"              "SPECIES.Groups.SPECIES_GROUP"
-#' [19] "SPECIES.Groups.CPC_DIVISION"        "SPECIES.Groups.CPC_GROUP"           "SPECIES.Groups.CPC"
-#' [22] "AREA.Codelist"                      "AREA.Groups"                        "AREA.Groups.INLAND_MARINE"
-#' [25] "AREA.Groups.OCEAN"                  "AREA.Groups.SUB_OCEAN"              "AREA.Groups.FA_REGION"
-#' [28] "ENVIRONMENT.Codelist"               "ENVIRONMENT.Groups"
+#'  [1] "Dimensions"                           "COUNTRY.Codelist"                     "COUNTRY.Groups"
+#'  [4] "COUNTRY.CONTINENT.Codelist"           "COUNTRY.CONTINENT.Groups"             "COUNTRY.GEO_REGION.Codelist"
+#'  [7] "COUNTRY.GEO_REGION.Groups"            "COUNTRY.ECON_CLASS.Codelist"          "COUNTRY.ECON_CLASS.Groups"
+#'  [10] "COUNTRY.ECON_GROUP.Codelist"          "COUNTRY.ECON_GROUP.Groups"            "COUNTRY.COMMISSION.Codelist"
+#'  [13] "COUNTRY.COMMISSION.Groups"            "COUNTRY.ECO_REGION.Codelist"          "COUNTRY.ECO_REGION.Groups"
+#'  [16] "COUNTRY.OTHER_COUNTRY_GROUP.Codelist" "COUNTRY.OTHER_COUNTRY_GROUP.Groups"   "SPECIES.Codelist"
+#'  [19] "SPECIES.Groups"                       "SPECIES.YEARBOOK_GROUP.Codelist"      "SPECIES.YEARBOOK_GROUP.Groups"
+#'  [22] "SPECIES.ISSCAAP_DIVISION.Codelist"    "SPECIES.ISSCAAP_DIVISION.Groups"      "SPECIES.ISSCAAP_GROUP.Codelist"
+#'  [25] "SPECIES.ISSCAAP_GROUP.Groups"         "SPECIES.MAIN_GROUP.Codelist"          "SPECIES.MAIN_GROUP.Groups"
+#'  [28] "SPECIES.ORDER.Codelist"               "SPECIES.ORDER.Groups"                 "SPECIES.FAMILY.Codelist"
+#'  [31] "SPECIES.FAMILY.Groups"                "SPECIES.SPECIES_GROUP.Codelist"       "SPECIES.SPECIES_GROUP.Groups"
+#'  [34] "SPECIES.CPC_DIVISION.Codelist"        "SPECIES.CPC_DIVISION.Groups"          "SPECIES.CPC_GROUP.Codelist"
+#'  [37] "SPECIES.CPC_GROUP.Groups"             "SPECIES.CPC.Codelist"                 "SPECIES.CPC.Groups"
+#'  [40] "AREA.Codelist"                        "AREA.Groups"                          "AREA.INLAND_MARINE.Codelist"
+#'  [43] "AREA.INLAND_MARINE.Groups"            "AREA.OCEAN.Codelist"                  "AREA.OCEAN.Groups"
+#'  [46] "AREA.SUB_OCEAN.Codelist"              "AREA.SUB_OCEAN.Groups"                "AREA.FA_REGION.Codelist"
+#'  [49] "AREA.FA_REGION.Groups"                "ENVIRONMENT.Codelist"
+#'
+#'  subset(get("COUNTRY.Codelist"),Identifier==29|Identifier==45|Identifier==24,select=c('Identifier','Name_En','UN_Code','ISO3_Code'))
+#'    Identifier                  Name_En UN_Code ISO3_Code
+#'  24         24 British Indian Ocean Ter     086       IOT
+#'  29         29                  Burundi     108       BDI
+#'  45         45                  Comoros     174       COM
+#'  get("COUNTRY.CONTINENT.Codelist")[2,]
+#'    Identifier UN_Code    Name_En     Name_Fr   Name_Es
+#'  2        359     002     Africa     Afrique    África
+#'  head(get("COUNTRY.CONTINENT.Groups"))
+#'    L1.group L2.member   NA NA.1
+#'  1      359        29 1900 9999
+#'  2      359        45 1900 9999
+#'  3      359        24 1900 9999
+#'  4      359        72 1900 9999
+#'  5      359       114 1900 9999
+#'  6      359        62 1900 9999
+#'  get('COUNTRY.CONTINENT.Groups.2')[[2,1]]
+#'  [1] "359"
+#'  head(get('COUNTRY.CONTINENT.Groups.2')[[2,2]])
+#'  [1] "29"  "45"  "24"  "72"  "114" "62"
 #' }
 #'
 #'
@@ -59,7 +88,7 @@ ReadDatasetCodelists <- function(metadata, datasetID) {
     dimName <- Dimensions[dimRow]$Acronym
 
     # create the Country.Codelist
-    assign(paste0(dimName,'.Codelist'), GetCodelistByID(dimensions[dimRow]$EBXCodelist))
+    assign(paste0(dimName,'.Codelist'), GetCodelistByID(Dimensions[dimRow]$EBXCodelist))
     objectlist <- c(objectlist, paste0(dimName,'.Codelist'))
     print(paste0('=',dimName,'.Codelist ID=',Dimensions[dimRow]$EBXCodelist))
 
@@ -74,22 +103,35 @@ ReadDatasetCodelists <- function(metadata, datasetID) {
       objectlist <- c(objectlist, paste0(dimName,'.Groups'))
       print(paste0('=',dimName,'.Groups ID=',Dimensions[dimRow]$ConceptID))
 
-      # create Country.Hierarchies
-      hierarchies <- get(paste0(dimName,'.Groups'))
-      for (hierRow in 1:nrow(hierarchies)) {
-        hierarchy <- ReadEBXHierarchy(hierarchies[hierRow,'EBXCodelist'], Dimensions[dimRow]$EBXCodelist)
-        hierName <- paste0(dimName,'.Groups.',hierarchies[hierRow,'Acronym'])
-        print(paste0('=',hierName,' ID=',hierarchies[hierRow,'EBXCodelist'],'->',Dimensions[dimRow]$EBXCodelist))
+
+      # create Country.Groups
+      groups <- get(paste0(dimName,'.Groups'))
+      for (groupRow in 1:nrow(groups)) {
+        # create Country.Continent.Codelist
+        groupCLname <- paste0(dimName,'.',groups[groupRow,'Acronym'],'.Codelist')
+        objectlist <- c(objectlist, groupCLname)
+        groupCL <- GetCodelistByID(groups[groupRow,'EBXCodelist'])
+        assign(groupCLname, groupCL)
+
+        # create Country.Continent.Groups
+        hierarchy <- ReadEBXHierarchy(groups[groupRow,'EBXCodelist'], Dimensions[dimRow]$EBXCodelist)
+        hierName <- paste0(dimName,'.',groups[groupRow,'Acronym'],'.Groups')
+        print(paste0('=',hierName,' ID=',groups[groupRow,'EBXCodelist'],'->',Dimensions[dimRow]$EBXCodelist))
         if (nrow(hierarchy) == 0) {
-          stop(paste('hierarchy ',hierName,' ID=', hierarchies[hierRow,'EBXCodelist'],'->',
+          stop(paste('hierarchy ',hierName,' ID=', groups[groupRow,'EBXCodelist'],'->',
                      Dimensions[dimRow]$EBXCodelist),' does not have any data')
         }
         assign(hierName, hierarchy)
+        hierarchy <- hierarchy[,c(1,2)]
+        colnames(hierarchy) <- c('group', 'member')
+        assign(paste0(hierName,'.2'), GroupAsList(hierarchy))
+
         objectlist <- c(objectlist,hierName)
+        objectlist <- c(objectlist,paste0(hierName,'.2'))
       }
     }
   }
-  print(paste0('=== saved ',length(objectlist),' to ',datasetName,'.RData, size=', object.size(get(objectlist))))
+  print(paste0('=== saved ',length(objectlist),' to ',datasetName,'.RData, size=', sum(sapply(objectlist,function(x){object.size(get(x))})) ))
   save(list=objectlist, file = paste0(datasetName,'.RData'))
 }
 
