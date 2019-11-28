@@ -26,25 +26,54 @@ It saves all objects into an RData file with the name of the dataset.
 \dontrun{
  library(faoebx5)
  library(fishstatr)
+ library(data.table)
  #use row1 for this example
  datasetID <- GetDatasets(metadata)[1,'Identifier']
  datasetName <- GetDatasets(metadata)[1,'Acronym']
 
  ReadDatasetCodelists(metadata, datasetID)
- [1] "=== saved 29 to AQUACULTURE.RData, size=349984"
+ [1] "=== saved 72 to AQUACULTURE.RData, size=23293352"
 
  load(file = paste0(datasetName,'.RData'))
  > ls()
-[1] "COUNTRY.Codelist"                   "COUNTRY.Groups"                     "COUNTRY.Groups.CONTINENT"
-[4] "COUNTRY.Groups.GEO_REGION"          "COUNTRY.Groups.ECON_CLASS"          "COUNTRY.Groups.ECON_GROUP"
-[7] "COUNTRY.Groups.COMMISSION"          "COUNTRY.Groups.ECO_REGION"          "COUNTRY.Groups.OTHER_COUNTRY_GROUP"
-[10] "SPECIES.Codelist"                   "SPECIES.Groups"                     "SPECIES.Groups.YEARBOOK_GROUP"
-[13] "SPECIES.Groups.ISSCAAP_DIVISION"    "SPECIES.Groups.ISSCAAP_GROUP"       "SPECIES.Groups.MAIN_GROUP"
-[16] "SPECIES.Groups.ORDER"               "SPECIES.Groups.FAMILY"              "SPECIES.Groups.SPECIES_GROUP"
-[19] "SPECIES.Groups.CPC_DIVISION"        "SPECIES.Groups.CPC_GROUP"           "SPECIES.Groups.CPC"
-[22] "AREA.Codelist"                      "AREA.Groups"                        "AREA.Groups.INLAND_MARINE"
-[25] "AREA.Groups.OCEAN"                  "AREA.Groups.SUB_OCEAN"              "AREA.Groups.FA_REGION"
-[28] "ENVIRONMENT.Codelist"               "ENVIRONMENT.Groups"
+ [1] "Dimensions"                           "COUNTRY.Codelist"                     "COUNTRY.Groups"
+ [4] "COUNTRY.CONTINENT.Codelist"           "COUNTRY.CONTINENT.Groups"             "COUNTRY.GEO_REGION.Codelist"
+ [7] "COUNTRY.GEO_REGION.Groups"            "COUNTRY.ECON_CLASS.Codelist"          "COUNTRY.ECON_CLASS.Groups"
+ [10] "COUNTRY.ECON_GROUP.Codelist"          "COUNTRY.ECON_GROUP.Groups"            "COUNTRY.COMMISSION.Codelist"
+ [13] "COUNTRY.COMMISSION.Groups"            "COUNTRY.ECO_REGION.Codelist"          "COUNTRY.ECO_REGION.Groups"
+ [16] "COUNTRY.OTHER_COUNTRY_GROUP.Codelist" "COUNTRY.OTHER_COUNTRY_GROUP.Groups"   "SPECIES.Codelist"
+ [19] "SPECIES.Groups"                       "SPECIES.YEARBOOK_GROUP.Codelist"      "SPECIES.YEARBOOK_GROUP.Groups"
+ [22] "SPECIES.ISSCAAP_DIVISION.Codelist"    "SPECIES.ISSCAAP_DIVISION.Groups"      "SPECIES.ISSCAAP_GROUP.Codelist"
+ [25] "SPECIES.ISSCAAP_GROUP.Groups"         "SPECIES.MAIN_GROUP.Codelist"          "SPECIES.MAIN_GROUP.Groups"
+ [28] "SPECIES.ORDER.Codelist"               "SPECIES.ORDER.Groups"                 "SPECIES.FAMILY.Codelist"
+ [31] "SPECIES.FAMILY.Groups"                "SPECIES.SPECIES_GROUP.Codelist"       "SPECIES.SPECIES_GROUP.Groups"
+ [34] "SPECIES.CPC_DIVISION.Codelist"        "SPECIES.CPC_DIVISION.Groups"          "SPECIES.CPC_GROUP.Codelist"
+ [37] "SPECIES.CPC_GROUP.Groups"             "SPECIES.CPC.Codelist"                 "SPECIES.CPC.Groups"
+ [40] "AREA.Codelist"                        "AREA.Groups"                          "AREA.INLAND_MARINE.Codelist"
+ [43] "AREA.INLAND_MARINE.Groups"            "AREA.OCEAN.Codelist"                  "AREA.OCEAN.Groups"
+ [46] "AREA.SUB_OCEAN.Codelist"              "AREA.SUB_OCEAN.Groups"                "AREA.FA_REGION.Codelist"
+ [49] "AREA.FA_REGION.Groups"                "ENVIRONMENT.Codelist"
+
+ subset(get("COUNTRY.Codelist"),Identifier==29|Identifier==45|Identifier==24,select=c('Identifier','Name_En','UN_Code','ISO3_Code'))
+   Identifier                  Name_En UN_Code ISO3_Code
+ 24         24 British Indian Ocean Ter     086       IOT
+ 29         29                  Burundi     108       BDI
+ 45         45                  Comoros     174       COM
+ get("COUNTRY.CONTINENT.Codelist")[2,]
+   Identifier UN_Code    Name_En     Name_Fr   Name_Es
+ 2        359     002     Africa     Afrique    Ãfrica
+ head(get("COUNTRY.CONTINENT.Groups"))
+   L1.group L2.member   NA NA.1
+ 1      359        29 1900 9999
+ 2      359        45 1900 9999
+ 3      359        24 1900 9999
+ 4      359        72 1900 9999
+ 5      359       114 1900 9999
+ 6      359        62 1900 9999
+ get('COUNTRY.CONTINENT.Groups.2')[[2,1]]
+ [1] "359"
+ head(get('COUNTRY.CONTINENT.Groups.2')[[2,2]])
+ [1] "29"  "45"  "24"  "72"  "114" "62"
 }
 
 

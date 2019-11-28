@@ -104,10 +104,12 @@ combineLevels <- function(level1, level2) {
   colnames(level2) <- c('L2.group', 'L2.member')
 
   # inner join (level1, level2)
-  result <-merge (x=level1,y=level2, by.x='L1.member', by.y='L2.group')
+  result <-merge (x=level1[1:2],y=level2[1:2], by.x='L1.member', by.y='L2.group')
 
   # drop the join column
   result['L1.member'] <- NULL
+
+  colnames(result) <- c('group', 'member')
 
   return(result)
 }
@@ -120,5 +122,5 @@ mergeRelation  <- function(merge1, merge2) {
   colnames(merge1) <- c('group', 'member')
   colnames(merge2) <- c('group', 'member')
 
-  return(rbind(merge1, merge2))
+  return(rbind(merge1[1:2], merge2[1:2]))
 }
