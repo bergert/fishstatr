@@ -27,6 +27,7 @@ vignettes/*.pdf
 # knitr and R markdown default cache directories
 /*_cache/
 /cache/
+/man/*.Rd
 
 # Temporary files created by R markdown
 *.utf8.md
@@ -44,3 +45,4 @@ ebx5_connection.yaml
 
 # saved data
 *.RData
+

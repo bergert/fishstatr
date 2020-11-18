@@ -8,26 +8,11 @@
 #' @param metadata FishStat metadata; obtained using \code{\link{ReadMetadata}}
 #' @param datasetID dataset Identifier obtained using \code{\link{GetDatasets}}
 #'
-#' @seealso \code{\link{GetEBXHierarchy}}.
+#' @seealso \code{\link{ReadEBXHierarchy}}.
 #'
 #' @return Returns an object of the class \code{\link[data.table]{data.table}}
 #'
 #' @importFrom data.table data.table
-#' @importFrom magrittr "%>%"
-#'
-#' @examples
-#'
-#' \dontrun{
-#' library(faoebx5)
-#' library(fishstatr)
-#' metadata <- ReadMetadata()
-#' GetDatasetDimensions(metadata, datasetID = 1)
-#'    AttributeID ConceptID DimensionID                Name_En EBXCodelist    EBXName
-#'1:           5         1          11                Country         200    UN_Code
-#'2:         101         2          12          ASFIS species         301 Alpha_Code
-#'3:          41         8          13 FAO major fishing area         403       Code
-#'4:         151        30          14            Environment         502       Code
-#' }
 #'
 #' @export
 #'

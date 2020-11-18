@@ -1,4 +1,5 @@
-#' @title Convert an grouping from EBX5 to a list
+utils::globalVariables(c("."))
+#' @title Convert an grouping from EBX5 to a list; internal
 #'
 #' @param grouping a grouping in the format (int=parent, int=child), as returned by EBX5
 #'
@@ -6,29 +7,14 @@
 #'
 #' @description This function will merge the child ID's belonging to a single parent ID
 #'
-#' @details This is a wicked use of \code{\link[magrittr]{"%>%"}} to reformat a grouping in a
-#' way to use groups in applications.
+#' @details Using \code{\link{dplyr}} to reformat a grouping in a way to use groups in applications.
+#' The funcion was re-written in order not to use tibble::tibble, or dplyr::group_map as the shiny server server
+#' does not have compatible version installed.
 #'
 #' @return grouping in the format int=parent list=(child1,child2, child3...)
 #'
-#' @importFrom dplyr group_by group_map ungroup
-#' @importFrom magrittr "%>%"
-#' @importFrom data.table data.table
+#' @importFrom dplyr group_by ungroup %>% summarise_all funs
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' df <- data.frame(group=c(100,100, 200, 200), children=c(10,11,21,22))
-#' str(GroupAsList(df))
-#'  $ grouping[, 1]: num  100 200
-#'  $ children     :List of 2
-#'    ..$ : num  10 11
-#'    ..$ : num  21 22
-#'
-#' library(faoebx5)
-#' df <- ReadEBXGroup('HCL_FI_COUNTRY_CONTINENT_GEOREGION')
-#' GroupAsList(df)
-#' }
 #'
 #'
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
@@ -37,12 +23,27 @@ GroupAsList <- function(grouping) {
   #-- first: group using the parent column
   df1 <- grouping %>% group_by(grouping[,1])
 
-  #-- second: convert all children to a list
-  df2 <- df1 %>% group_map(~convert2List(.x[2]))
+  #-- second: summarise the groups to a list
+  df2 <- df1 %>% summarise_all(funs(summary = list(.)))
 
-  return (df2 %>% ungroup())
+  #-- remove the original group column
+  colnames(df2) <- c('grouping','group','children')
+  df2$group <- NULL
+
+  return(as.data.frame(df2 %>% ungroup()))
 }
 
-convert2List <- function(values) {
-  return(tibble::tibble(children = as.list(values)))
-}
+#GroupAsList_original <- function(grouping) {
+#
+#  #-- first: group using the parent column
+#  df1 <- grouping %>% group_by(grouping[,1])
+#
+#  #-- second: convert all children to a list
+#  df2 <- df1 %>% group_map(~convert2List(.x[2]))
+#
+#  return (df2 %>% ungroup())
+#}
+
+#convert2List <- function(values) {
+#  return(tibble::tibble(children = as.list(values)))
+#}

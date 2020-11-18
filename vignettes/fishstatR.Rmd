@@ -1,0 +1,222 @@
+---
+title: 'faoebx5 Getting started'
+date: '`r Sys.Date()`'
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+    vignette: >
+      %\VignetteIndexEntry{faoebx5-overview}
+      %\VignetteEngine{knitr::rmarkdown}
+      %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr_opts, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.align = "center"
+)
+
+options(width = 95)
+```
+This library builds on the `faoexb5` lbrary for basic connectivity. 
+
+`fishstatr` is a companion library, which uses a Metadata structure to allow programs to discover available objects in EBX5, 
+their attributes and connections. As Metadata are user-created tables in EBX5, they can be maintained by the same users upadting the schema.
+
+Using this library allows the program to access reference-data, whithout having to know the exact location: 
+It allows users to move things in EBX5 wthout breaking the programs. Code-lists and Groups are accessed using the Acronym (SDMX name).
+
+## GetEBXCodeLists()
+
+This function returns the index of code lists defined in the folder `Metadata`, table name `EBXCodelist`.
+
+```{r GetEBXCodeLists, eval=F, include=TRUE}
+#library(faoebx5)
+#library(fishstatr)
+#GetEBXCodeLists()
+```
+
+## GetEBXGroups()
+
+This function returns the index of code lists defined in the folder `Metadata`, table name `EBXGroup`.
+
+```{r GetEBXGroups, eval=F, include=TRUE}
+#library(faoebx5)
+#library(fishstatr)
+#GetEBXGroups()
+```
+
+## ReadEBXCodeList()
+
+This function aimed to read code list data from EBX5 to R. As we can see,
+
+```{r read_codelists, eval=T, include=TRUE}
+#cl_fao_level1 <- ReadEBXCodeList(sdmx_name = 'CL_FI_COMMODITY_FAO_LEVEL1')
+#cl_fao_level1 %>% tbl_df()
+```
+
+<hr>
+
+## InsertEBXCodeList()
+
+`InsertEBXCodeList()` and `UpdateEBXCodeList()` should be used carefully, because it will change the original data stored in the EBX database. Regardless, this function only can be run by users who are rights to insert and update data in the EBX.
+
+Currently, `faoebx5` has not implemmented function to remove data in the EBX, so we can  do it only using the EBX user interface.
+
+The `InsertEBXCodeList()` function requires a data frame with the new rows that will be inserted. This data frame must contain the same variables/columns of the original table. For instance, the code list `FAO_Level1` has the following columns: `#r names(cl_fao_level1)`. Therefore, the new rows will contain these same columns, as we can see in the data frame `#cl_faolevel1_new`.
+
+```{r new_cl, eval=T, include=TRUE}
+  cl_faolevel1_new <- data.frame(
+   Identifier = 99999,
+   FAO_Code = 7L,
+   NameEn = "XXXX_English",
+   NameFr = "XXXX_French",
+   NameEs = "XXXX_Es"
+ )
+```
+
+Once we have created the data frame with the new rows, the next step is to run the function `InsertEBXCodeList()` specificating the arguments: `data` with data frame composed by the news rows to be inserted, `cl_name` the code list name, `folder` the folder name, `branch` the branch name, and  `instance` the instance name.
+
+```{r insert_codelist, eval=F, include=TRUE}
+library(faoebx5)
+library(fishstatr)
+InsertEBXCodeList(data= cl_faolevel1_new,
+                  sdmx_codelist_name  = 'FAO_Level1')
+```
+
+## UpdateEBXCodeList()
+
+`UpdateEBXCodeList()` function works similarly to `InsertEBXCodeList()`. Therefore, we have to create a data frame with the data that we desire to update and then specify the code list name, as well as the `folder` name, `branch` name, and the `instance` name. In this example, we just changed the data stored in the column `NameEs` from `XXXX_Es` to `Name spanish`.
+
+```{r update_codelist, eval=F, include=TRUE}
+ library(faoebx5)
+ library(fishstatr)
+cl_faolevel1_new$NameEs <- 'Name spanish' 
+UpdateEBXCodeList(data = cl_update,
+                  sdmx_codelist_name  = 'FAO_Level1')
+```
+<hr>
+
+## GetDatasetDimensions
+Shows the dimensions for a dataset of interest. Defined datasets can be listed using `GetDatasets()`
+
+```{r dataset_dimensions, eval=F, include=TRUE}
+ metadata <- ReadMetadata()
+ GetDatasetDimensions(metadata, datasetID = 1)
+# AttributeID ConceptID DimensionID                Name_En EBXCodelist    EBXName
+#  1:           5         1          11                Country         200    UN_Code
+#  2:         101         2          12          ASFIS species         301 Alpha_Code
+#  3:          41         8          13 FAO major fishing area         403       Code
+#  4:         151        30          14            Environment         502       Code 
+```
+
+## GetDimensionGroups
+Shows the dimension group for a datasets ConceptID. The ConceptID is returned by `GetDatasetDimensions()`.
+
+```{r dimension_groups, eval=F, include=TRUE}
+ metadata <- ReadMetadata()
+ GetDimensionGroups(metadata, dimensionConceptID = 1)
+#    Identifier             Acronym Sort EBXCodelist                                Name_En
+# 3           3           CONTINENT  102         201                              Continent
+# 4           4          GEO_REGION  103         208                    Geographical region
+# 5           5          ECON_CLASS  105         202                         Economic class
+# 6           6          ECON_GROUP  106         203                         Economic group
+```
+
+## GetGroupConnectionIDs
+Takes GetDimensionGroups uses the information from `GetDimensionGroups()` and 
+returns a list of what I call solutions. A solution documents all possible paths from
+the parent to the child. In the case of Species, there aretwo solutions: 
+MAJOR->ORDER->FAMILY->ITEM and MAJOR->ORDER->ITEM.
+This is used by `ReadEBXHierarchy()` which resolves the solution.
+
+```{r -GetGroupConnectionIDs, eval=F, include=TRUE}
+GetGroupConnectionIDs(306,301)
+# [[1]]
+# [1] "306" "307" "302" "301"
+# [[2]]
+# [1] "306" "307" "301"
+```
+
+<hr>
+
+## ReadEBXHierarchy
+Returns a desired grouping, in this example Species: MAJOR(306) to ITEM(301).
+It uses `GetGroupConnectionIDs()` to discover the solution(s), and then resolves
+the solution(s) to actual groupings. Levels are combined to provide the final
+grouping result.
+The ASFIS code-list has 12751 references.
+
+```{r ReadEBXHierarchy, eval=F, include=TRUE}
+result <- ReadEBXHierarchy(306,301)
+# [1] "  parentID=306, childID=307, sdmxGroupName=HCL_FI_SPECIES_MAJOR_ORDER"
+# [1] "  parentID=307, childID=302, sdmxGroupName=HCL_FI_SPECIES_ORDER_FAMILY"
+# [1] "  parentID=302, childID=301, sdmxGroupName=HCL_FI_SPECIES_FAMILY_ITEM"
+# [1] "  parentID=306, childID=307, sdmxGroupName=HCL_FI_SPECIES_MAJOR_ORDER"
+# [1] "  parentID=307, childID=301, sdmxGroupName=HCL_FI_SPECIES_ORDER_ITEM"
+# nrow(result)
+# [1] 12751
+```
+
+## GetEBXHierarchy
+This a convenience function; same as `ReadEBXHierarchy()` but uses codelist names. 
+The result can be resolved to a grouping by `ReadEBXHierarchy()`
+```{r -GetEBXHierarchy, eval=F, include=TRUE}
+ GetEBXHierarchy('CL_FI_SPECIES_MAJOR', 'CL_FI_SPECIES_ITEM')
+```
+
+## ReadDatasetCodelists
+Reads all information about a dataset's dimensions and hierarchies and creates an Rdata file.
+
+```{r ReadDatasetCodelists, eval=F, include=TRUE}
+ dataset_ID <- GetDatasets(metadata)[1,'Identifier']
+ datasetName <- GetDatasets(metadata)[1,'Acronym']
+ ReadDatasetCodelists(metadata, dataset_ID)
+#  [1] "=== saved 72 to AQUACULTURE.RData, size=23293352"
+#
+#  load(file = paste0(datasetName,'.RData'))
+#  > ls()
+#  [1] "Dimensions"                            "COUNTRY.Codelist"                    "COUNTRY.Groups"
+#  [4] "COUNTRY.CONTINENT.Codelist"            "COUNTRY.CONTINENT.Groups"            "COUNTRY.GEO_REGION.Codelist"
+#  [7] "COUNTRY.GEO_REGION.Groups"             "COUNTRY.ECON_CLASS.Codelist"         "COUNTRY.ECON_CLASS.Groups"
+#  [10] "COUNTRY.ECON_GROUP.Codelist"          "COUNTRY.ECON_GROUP.Groups"           "COUNTRY.COMMISSION.Codelist"
+#  [13] "COUNTRY.COMMISSION.Groups"            "COUNTRY.ECO_REGION.Codelist"         "COUNTRY.ECO_REGION.Groups"
+#  [16] "COUNTRY.OTHER_COUNTRY_GROUP.Codelist" "COUNTRY.OTHER_COUNTRY_GROUP.Groups"  "SPECIES.Codelist"
+#  [19] "SPECIES.Groups"                       "SPECIES.YEARBOOK_GROUP.Codelist"     "SPECIES.YEARBOOK_GROUP.Groups"
+#  [22] "SPECIES.ISSCAAP_DIVISION.Codelist"    "SPECIES.ISSCAAP_DIVISION.Groups"     "SPECIES.ISSCAAP_GROUP.Codelist"
+#  [25] "SPECIES.ISSCAAP_GROUP.Groups"         "SPECIES.MAIN_GROUP.Codelist"         "SPECIES.MAIN_GROUP.Groups"
+#  [28] "SPECIES.ORDER.Codelist"               "SPECIES.ORDER.Groups"                "SPECIES.FAMILY.Codelist"
+#  [31] "SPECIES.FAMILY.Groups"                "SPECIES.SPECIES_GROUP.Codelist"      "SPECIES.SPECIES_GROUP.Groups"
+#  [34] "SPECIES.CPC_DIVISION.Codelist"        "SPECIES.CPC_DIVISION.Groups"         "SPECIES.CPC_GROUP.Codelist"
+#  [37] "SPECIES.CPC_GROUP.Groups"             "SPECIES.CPC.Codelist"                "SPECIES.CPC.Groups"
+#  [40] "AREA.Codelist"                        "AREA.Groups"                         "AREA.INLAND_MARINE.Codelist"
+#  [43] "AREA.INLAND_MARINE.Groups"            "AREA.OCEAN.Codelist"                 "AREA.OCEAN.Groups"
+#  [46] "AREA.SUB_OCEAN.Codelist"              "AREA.SUB_OCEAN.Groups"               "AREA.FA_REGION.Codelist"
+#  [49] "AREA.FA_REGION.Groups"                "ENVIRONMENT.Codelist"
+#
+#   subset(get("COUNTRY.Codelist"),Identifier==29|Identifier==45|Identifier==24,
+#          select=c('Identifier','Name_En','UN_Code','ISO3_Code'))
+#     Identifier                  Name_En UN_Code ISO3_Code
+#   24         24 British Indian Ocean Ter     086       IOT
+#   29         29                  Burundi     108       BDI
+#   45         45                  Comoros     174       COM
+#   get("COUNTRY.CONTINENT.Codelist")[2,]
+#     Identifier UN_Code    Name_En     Name_Fr   Name_Es
+#   2        359     002     Africa     Afrique    África
+#   head(get("COUNTRY.CONTINENT.Groups"))
+#     L1.group L2.member   NA NA.1
+#  1      359        29 1900 9999
+#  2      359        45 1900 9999
+#  3      359        24 1900 9999
+#  4      359        72 1900 9999
+#  5      359       114 1900 9999
+#  6      359        62 1900 9999
+#  get('COUNTRY.CONTINENT.Groups.2')[[2,1]]
+#  [1] "359"
+#  head(get('COUNTRY.CONTINENT.Groups.2')[[2,2]])
+#  [1] "29"  "45"  "24"  "72"  "114" "62"
+```
+
+

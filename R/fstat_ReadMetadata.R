@@ -4,16 +4,13 @@
 #'
 #' @return The returned object is used by other methods
 #'
-#' @importFrom faoebx5 ReadEBXGroup ReadEBXCodeList
+#' @importFrom faoebx5 EBXRead
 #' @import data.table
 #'
 #' @examples
-#'
 #' \dontrun{
-#' install.packages("C:/Programs/GithubTom/faoebx5_1.0.0.tar.gz", repos = NULL, type="source")
-#' devtools::install_github('bergertom/faoebx5')
 #' library(faoebx5)
-#' SetupEBXConnection('Fishery','Fishery','http://server.name/ebx-dataservices/connector','user', 'pass')
+#' library(fishstatr)
 #' metadata <- ReadMetadata()
 #' }
 #'

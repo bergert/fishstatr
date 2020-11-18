@@ -1,0 +1,60 @@
+url: http://bergertom.github.io/fishstatr
+
+template:
+  params:
+    bootswatch: flatly
+
+author:
+  Thomas Berger:
+    href: https://bergertom.github.io
+
+home:
+  links:
+  - text: Browse source code at
+    href: https://github.com/bergertom/fishstatr
+  - text: Report a bug at
+    href: https://github.com/bergertom/fishstatr/issues
+
+reference:
+  - title: The fishstatR package
+    contents:
+    - fishstatr
+
+  - title: Basic EBX5 metadata functions
+    contents:
+    - GetEBXCodeLists
+    - GetEBXGroups
+    - GetEBXHierarchy
+    - ReadDatasetCodelists
+
+  - title: Codelist manipulation
+    contents:
+    - ReadEBXCodeList
+    - InsertEBXCodeList
+    - UpdateEBXCodeList
+    - RemoveEBXCodeList
+
+  - title: Group manipulation
+    contents:
+    - ReadEBXGroup
+    - InsertEBXGroup
+    - UpdateEBXGroup
+    - RemoveEBXGroup
+
+  - title: FishStat metadata
+    contents:
+    - ReadMetadata
+    - GetDatasets
+    - GetDatasetDimensions
+    - GetDimensionGroups
+    - ReadDatasetCodelists
+    - GetEBXHierarchy
+
+  - title: Utility functions
+    contents:
+    - GetCodelistByID
+    - GetGroupConnectionIDs
+    - GroupAsList
+    - getEbxConnection
+    - ReadEBXHierarchy
+

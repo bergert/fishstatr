@@ -1,48 +1,34 @@
-#' @title Read a complete group hierarchy
+#' @title Read a complete group hierarchy; internal
 #'
-#' @param sdmx_level1 ID upper level of a hierarchy, as returned by GetDimensionGroups$EBXCodelist
-#' @param sdmx_level2 lower level of a hierarchy, as returned by GetDimensions$EBXCodelist
+#' @param dim_level1_ID ID upper level of a hierarchy, as returned by GetDimensionGroups$EBXCodelist
+#' @param dim_level2_ID lower level of a hierarchy, as returned by GetDimensions$EBXCodelist
 #'
 #' @seealso \code{\link{GetDimensionGroups}} and \code{\link{GetDatasetDimensions}}.
 #'
 #' @description Is used by \code{\link{ReadDatasetCodelists}}.
 #'
-#' @details This function calls \code{\link{GetGroupConnections}} to find possible
+#' @details This function calls \code{\link{GetGroupConnectionIDs}} to find possible
 #' grouping solutions accross multiple levels. For each of these levels if reads the
-#' \code{\link[faoebx5]{ReadEBXGroup}} grouping, combining all levels to a final result.
-#' In case there are multiple group solutions reported by \code{\link{GetGroupConnections}},
-#' each solution is combined and the groupings for each solution are merged into the final
+#' \code{\link{ReadEBXGroup}} grouping, combining all levels to a final result.
+#' In case there are multiple group solutions reported by \code{\link{GetGroupConnectionIDs}},
+#' each solution is resolved and the groupings for each solution are combined into a final
 #' result.
 #'
 #' @return grouping as a \code{\link[data.table]{data.table}} with two columns(parent,child)
 #'
-#' @importFrom dplyr group_by group_map
+#' @importFrom dplyr group_by group_map ungroup "%>%"
 #' @importFrom data.table data.table
-#' @importFrom faoebx5 ReadEBXGroup
+#' @importFrom data.table data.table
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' library(faoebx5)
-#' library(fishstatr)
-#' ReadMetadata()
-#' result <- ReadEBXHierarchy(306,301)
-#' [1] "  parentID=306, childID=307, sdmxGroupName=HCL_FI_SPECIES_MAJOR_ORDER"
-#' [1] "  parentID=307, childID=302, sdmxGroupName=HCL_FI_SPECIES_ORDER_FAMILY"
-#' [1] "  parentID=302, childID=301, sdmxGroupName=HCL_FI_SPECIES_FAMILY_ITEM"
-#' [1] "  parentID=306, childID=307, sdmxGroupName=HCL_FI_SPECIES_MAJOR_ORDER"
-#' [1] "  parentID=307, childID=301, sdmxGroupName=HCL_FI_SPECIES_ORDER_ITEM"
-#' nrow(result)
-#' [1] 12751
-#' }
 #'
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
-ReadEBXHierarchy <- function(sdmx_level1_ID, sdmx_level2_ID) {
+ReadEBXHierarchy <- function(dim_level1_ID, dim_level2_ID) {
 
   # resolve grouping solutions
-  allSolutions <- GetGroupConnections(sdmx_level1_ID, sdmx_level2_ID)
+  allSolutions <- GetGroupConnectionIDs(dim_level1_ID, dim_level2_ID)
   if (length(allSolutions) == 0) {
-    stop('the grouping ',sdmx_level1_ID,'->',sdmx_level2_ID,' is not defined in EBX5 metadata')
+    stop('the grouping ',dim_level1_ID,'->',dim_level2_ID,' is not defined in EBX5 metadata')
   }
 
   # read the first grouping
@@ -72,6 +58,7 @@ getGrouping <- function(solution) {
   # read the inital grouping
   parentID <- solution[1]
   childID <- solution[2]
+  ebx5.gr_data <- GetEBXGroups()
   sdmxGroupName <- ebx5.gr_data[ebx5.gr_data$from==parentID & ebx5.gr_data$to==childID, 'Acronym']
   print(paste0('  parentID=',parentID,', childID=',childID,', sdmxGroupName=',sdmxGroupName))
   result <- ReadEBXGroup(sdmxGroupName)

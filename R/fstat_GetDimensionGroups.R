@@ -5,28 +5,13 @@
 #' aggregation (Continent, Region, ...).
 #'
 #' @param metadata FishStat metadata; obtained using \code{\link{ReadMetadata}}
-#' @param dimensionConceptID dimension Identifier (a concept) obtained using \code{\link{GetDimensions}}
+#' @param dimensionConceptID dimension Identifier (a concept) obtained using \code{\link{GetDatasetDimensions}}
 #'
-#' @seealso \code{\link{GetEBXHierarchy}}.
+#' @seealso \code{\link{ReadEBXHierarchy}}.
 #'
 #' @return Returns an object of the class \code{\link[data.table]{data.table}}
 #'
-#' @importFrom rlang is_empty
 #' @import data.table
-#'
-#' @examples
-#'
-#' \dontrun{
-#' library(faoebx5)
-#' library(fishstatr)
-#' metadata <- ReadMetadata()
-#' GetDimensionGroups(metadata, dimensionConceptID = 1)
-#'    Identifier             Acronym Sort EBXCodelist                                Name_En
-#' 3           3           CONTINENT  102         201                              Continent
-#' 4           4          GEO_REGION  103         208                    Geographical region
-#' 5           5          ECON_CLASS  105         202                         Economic class
-#' 6           6          ECON_GROUP  106         203                         Economic group
-#' }
 #'
 #' @export
 #'
