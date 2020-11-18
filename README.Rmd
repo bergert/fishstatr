@@ -32,8 +32,3 @@ If you come from github: [Reference/Getting started](https://bergertom.github.io
 `fishstatR` Please, refer to the [Reference](reference/index.html) tab for more details about the functions, or you can start with examples on the page [Getting started ](articles/fishstatr.html).
 
 
-
-
-
-
-

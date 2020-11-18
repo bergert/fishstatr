@@ -17,3 +17,4 @@ devtools::install_github('bergertom/fishstatr')
 If you come from github: [Reference/Getting started](https://bergertom.github.io/fishstatr/):
 
 `fishstatR` Please, refer to the [Reference](reference/index.html) tab for more details about the functions, or you can start with examples on the page [Getting started](articles/fishstatr.html).
+
