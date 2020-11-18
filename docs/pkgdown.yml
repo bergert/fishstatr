@@ -2,8 +2,8 @@ pandoc: 1.19.2.1
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  fishstatr: fishstatr.html
-last_built: 2020-11-18T11:27Z
+  fishstat-r: fishstat-r.html
+last_built: 2020-11-18T11:49Z
 urls:
   reference: http://bergertom.github.io/fishstatr/reference
   article: http://bergertom.github.io/fishstatr/articles
