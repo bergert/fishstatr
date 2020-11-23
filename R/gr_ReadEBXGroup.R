@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' gr <- ReadEBXGroup(sdmx_group_name = 'HCL_FI_COMMODITY_FAOL1_FAOL2')
+#'ReadEBXGroup(sdmx_group_name = 'HCL_FI_COMMODITY_FAOL1_FAOL2')
 #' }
 #'
 #' @export

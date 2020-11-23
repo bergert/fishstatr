@@ -33,9 +33,12 @@ It allows users to move things in EBX5 wthout breaking the programs. Code-lists 
 This function returns the index of code lists defined in the folder `Metadata`, table name `EBXCodelist`.
 
 ```{r GetEBXCodeLists, eval=F, include=TRUE}
-#library(faoebx5)
-#library(fishstatr)
-#GetEBXCodeLists()
+library(faoebx5)
+library(fishstatr)
+GetEBXCodeLists()
+#   Identifier                        Acronym       Folder                   Name  Branch Instance
+# 6         100      CL_FI_COMMODITY_CPC_CLASS    Commodity              CPC_Class Fishery  Fishery
+# 7         101   CL_FI_COMMODITY_CPC_DIVISION    Commodity           CPC_Division Fishery  Fishery
 ```
 
 ## GetEBXGroups()
@@ -43,18 +46,30 @@ This function returns the index of code lists defined in the folder `Metadata`, 
 This function returns the index of code lists defined in the folder `Metadata`, table name `EBXGroup`.
 
 ```{r GetEBXGroups, eval=F, include=TRUE}
-#library(faoebx5)
-#library(fishstatr)
-#GetEBXGroups()
+library(faoebx5)
+library(fishstatr)
+GetEBXGroups()
+#   Identifier                                Acronym from  to          Folder                              Name  Branch Instance
+# 1         100       HCL_FI_COMMODITY_CPCCLASS_ISSCFC  100 113    CommodityGrp             Group_CPCClass_ISSCFC Fishery  Fishery
+# 2         101      HCL_FI_COMMODITY_CPCCLASS_SPECIES  100 301    CommodityGrp            Group_CPCClass_Species Fishery  Fishery
 ```
 
 ## ReadEBXCodeList()
 
-This function aimed to read code list data from EBX5 to R. As we can see,
+This function returns code-list.
 
-```{r read_codelists, eval=T, include=TRUE}
-#cl_fao_level1 <- ReadEBXCodeList(sdmx_name = 'CL_FI_COMMODITY_FAO_LEVEL1')
-#cl_fao_level1 %>% tbl_df()
+```{r readEBXCodelist, eval=F, include=TRUE}
+# reading a code-list using the Acronym
+ReadEBXCodeList('CL_FI_COMMODITY_FAO_LEVEL1')
+```
+
+## ReadEBXGroup()
+
+This function returns group.
+
+```{r ReadEBXGroup, eval=F, include=TRUE}
+# reading a group using the Acronym
+ReadEBXGroup('HCL_FI_COMMODITY_FAOL1_FAOL2')
 ```
 
 <hr>
@@ -67,7 +82,7 @@ Currently, `faoebx5` has not implemmented function to remove data in the EBX, so
 
 The `InsertEBXCodeList()` function requires a data frame with the new rows that will be inserted. This data frame must contain the same variables/columns of the original table. For instance, the code list `FAO_Level1` has the following columns: `#r names(cl_fao_level1)`. Therefore, the new rows will contain these same columns, as we can see in the data frame `#cl_faolevel1_new`.
 
-```{r new_cl, eval=T, include=TRUE}
+```{r InsertEBXCodeList1, eval=F, include=TRUE}
   cl_faolevel1_new <- data.frame(
    Identifier = 99999,
    FAO_Code = 7L,
@@ -79,7 +94,7 @@ The `InsertEBXCodeList()` function requires a data frame with the new rows that 
 
 Once we have created the data frame with the new rows, the next step is to run the function `InsertEBXCodeList()` specificating the arguments: `data` with data frame composed by the news rows to be inserted, `cl_name` the code list name, `folder` the folder name, `branch` the branch name, and  `instance` the instance name.
 
-```{r insert_codelist, eval=F, include=TRUE}
+```{r InsertEBXCodeList2, eval=F, include=TRUE}
 library(faoebx5)
 library(fishstatr)
 InsertEBXCodeList(data= cl_faolevel1_new,
@@ -90,7 +105,7 @@ InsertEBXCodeList(data= cl_faolevel1_new,
 
 `UpdateEBXCodeList()` function works similarly to `InsertEBXCodeList()`. Therefore, we have to create a data frame with the data that we desire to update and then specify the code list name, as well as the `folder` name, `branch` name, and the `instance` name. In this example, we just changed the data stored in the column `NameEs` from `XXXX_Es` to `Name spanish`.
 
-```{r update_codelist, eval=F, include=TRUE}
+```{r UpdateEBXCodeList, eval=F, include=TRUE}
  library(faoebx5)
  library(fishstatr)
 cl_faolevel1_new$NameEs <- 'Name spanish' 
@@ -102,7 +117,7 @@ UpdateEBXCodeList(data = cl_update,
 ## GetDatasetDimensions
 Shows the dimensions for a dataset of interest. Defined datasets can be listed using `GetDatasets()`
 
-```{r dataset_dimensions, eval=F, include=TRUE}
+```{r GetDatasetDimensions, eval=F, include=TRUE}
  metadata <- ReadMetadata()
  GetDatasetDimensions(metadata, datasetID = 1)
 # AttributeID ConceptID DimensionID                Name_En EBXCodelist    EBXName
@@ -115,7 +130,7 @@ Shows the dimensions for a dataset of interest. Defined datasets can be listed u
 ## GetDimensionGroups
 Shows the dimension group for a datasets ConceptID. The ConceptID is returned by `GetDatasetDimensions()`.
 
-```{r dimension_groups, eval=F, include=TRUE}
+```{r GetDimensionGroups, eval=F, include=TRUE}
  metadata <- ReadMetadata()
  GetDimensionGroups(metadata, dimensionConceptID = 1)
 #    Identifier             Acronym Sort EBXCodelist                                Name_En

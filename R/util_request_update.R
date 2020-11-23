@@ -44,14 +44,17 @@ request_update <- function(.data, .sdmx_name, .verb, .isCodeList = TRUE) {
   }
   else {
     ebx5.gr_data <- GetEBXGroups(connection)
+    if (length(ebx5.gr_data$Name[ebx5.gr_data$Acronym == .sdmx_name]) == 0) {
+      stop('Cannot find a group with acronym=<', .sdmx_name, '> defined in EBX metadata')
+    }
     #-- resolve the acutal location using metadata ----
-    branch   <- as.character(ebx5.gr_data$Branch[ebx5.cl_data$Acronym == .sdmx_name])
-    instance <- as.character(ebx5.gr_data$Instance[ebx5.cl_data$Acronym == .sdmx_name])
-    folder   <- as.character(ebx5.gr_data$Folder[ebx5.cl_data$Acronym == .sdmx_name])
-    cl_name  <- as.character(ebx5.gr_data$Name[ebx5.cl_data$Acronym == .sdmx_name])
+    branch   <- as.character(ebx5.gr_data$Branch[ebx5.gr_data$Acronym == .sdmx_name])
+    instance <- as.character(ebx5.gr_data$Instance[ebx5.gr_data$Acronym == .sdmx_name])
+    folder   <- as.character(ebx5.gr_data$Folder[ebx5.gr_data$Acronym == .sdmx_name])
+    cl_name  <- as.character(ebx5.gr_data$Name[ebx5.gr_data$Acronym == .sdmx_name])
   }
 
-  if (is.na(branch) | is.na(instance) | is.na(cl_name) | is.na(folder)) {
+  if (nchar(branch)==0 | nchar(instance)==0 | nchar(cl_name)==0 | nchar(folder)==0) {
     stop('Cannot find branch,instance,folder for ', .sdmx_name)
   }
 
@@ -73,7 +76,7 @@ request_update <- function(.data, .sdmx_name, .verb, .isCodeList = TRUE) {
                        table=cl_name, data=.data))
   }
   if (.verb == 'delete') {
-    return ( EBXRemove(branch=branch, instance=instance, folder=folder, folder2=folder2,
+    return ( EBXRemove(branch=branch, instance=instance,
                        table=cl_name, data=.data))
   }
 }

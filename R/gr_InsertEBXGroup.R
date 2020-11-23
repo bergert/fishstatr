@@ -15,16 +15,6 @@
 #'
 #' @importFrom faoebx5 GetEBXConnection
 #'
-#' @examples
-#'
-#' \dontrun{
-#' InsertEBXGroup(data = gr_new,
-#' gr_name  = 'EBXGroup',
-#' folder   = 'Metadata',
-#' branch   = 'Fishery',
-#' instance = 'Fishery')
-#' }
-#'
 #' @export
 #'
 #' @author Thomas Berger, \email{thomas.berger@fao.org}

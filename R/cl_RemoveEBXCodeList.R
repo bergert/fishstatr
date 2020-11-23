@@ -24,7 +24,7 @@
 #' cl_remove <- data.frame(
 #' Identifier = c(999, 888))
 #'
-#' UpdateEBXCodeList(data     = cl_remove,
+#' RemoveEBXCodeList(data     = cl_remove,
 #'                   sdmx_code_list_name  = 'EBXCodelist')
 #' }
 #'

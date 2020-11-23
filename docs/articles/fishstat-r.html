@@ -75,7 +75,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>faoebx5 Getting started</h1>
             
-            <h4 class="date">2020-11-18</h4>
+            <h4 class="date">2020-11-23</h4>
       
       
       <div class="hidden name"><code>fishstat-r.Rmd</code></div>
@@ -92,26 +92,40 @@
 <a href="#getebxcodelists" class="anchor"></a>GetEBXCodeLists()</h2>
 <p>This function returns the index of code lists defined in the folder <code>Metadata</code>, table name <code>EBXCodelist</code>.</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#library(faoebx5)</span>
-<span class="co">#library(fishstatr)</span>
-<span class="co">#GetEBXCodeLists()</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">faoebx5</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">fishstatr</span><span class="op">)</span>
+<span class="fu"><a href="../reference/GetEBXCodeLists.html">GetEBXCodeLists</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#   Identifier                        Acronym       Folder                   Name  Branch Instance</span>
+<span class="co"># 6         100      CL_FI_COMMODITY_CPC_CLASS    Commodity              CPC_Class Fishery  Fishery</span>
+<span class="co"># 7         101   CL_FI_COMMODITY_CPC_DIVISION    Commodity           CPC_Division Fishery  Fishery</span></code></pre></div>
 </div>
 <div id="getebxgroups" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getebxgroups" class="anchor"></a>GetEBXGroups()</h2>
 <p>This function returns the index of code lists defined in the folder <code>Metadata</code>, table name <code>EBXGroup</code>.</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#library(faoebx5)</span>
-<span class="co">#library(fishstatr)</span>
-<span class="co">#GetEBXGroups()</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">faoebx5</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">fishstatr</span><span class="op">)</span>
+<span class="fu"><a href="../reference/GetEBXGroups.html">GetEBXGroups</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#   Identifier                                Acronym from  to          Folder                              Name  Branch Instance</span>
+<span class="co"># 1         100       HCL_FI_COMMODITY_CPCCLASS_ISSCFC  100 113    CommodityGrp             Group_CPCClass_ISSCFC Fishery  Fishery</span>
+<span class="co"># 2         101      HCL_FI_COMMODITY_CPCCLASS_SPECIES  100 301    CommodityGrp            Group_CPCClass_Species Fishery  Fishery</span></code></pre></div>
 </div>
 <div id="readebxcodelist" class="section level2">
 <h2 class="hasAnchor">
 <a href="#readebxcodelist" class="anchor"></a>ReadEBXCodeList()</h2>
-<p>This function aimed to read code list data from EBX5 to R. As we can see,</p>
+<p>This function returns code-list.</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">#cl_fao_level1 &lt;- ReadEBXCodeList(sdmx_name = 'CL_FI_COMMODITY_FAO_LEVEL1')</span>
-<span class="co">#cl_fao_level1 %&gt;% tbl_df()</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># reading a code-list using the Acronym</span>
+<span class="fu"><a href="../reference/ReadEBXCodeList.html">ReadEBXCodeList</a></span><span class="op">(</span><span class="st">'CL_FI_COMMODITY_FAO_LEVEL1'</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="readebxgroup" class="section level2">
+<h2 class="hasAnchor">
+<a href="#readebxgroup" class="anchor"></a>ReadEBXGroup()</h2>
+<p>This function returns group.</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># reading a group using the Acronym</span>
+<span class="fu"><a href="../reference/ReadEBXGroup.html">ReadEBXGroup</a></span><span class="op">(</span><span class="st">'HCL_FI_COMMODITY_FAOL1_FAOL2'</span><span class="op">)</span></code></pre></div>
 <hr>
 </div>
 <div id="insertebxcodelist" class="section level2">

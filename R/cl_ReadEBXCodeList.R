@@ -17,7 +17,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' ReadEBXCodeList(sdmx_name = "CL_FI_COMMODITY_ISSCFC")
+#' ReadEBXCodeList(sdmx_codelist_name = "CL_FI_COMMODITY_ISSCFC")
 #' }
 #'
 #' @export
