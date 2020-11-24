@@ -11,6 +11,8 @@ Imports:
     faoebx5,
     dplyr,
     data.table
+Remotes:
+    lgsilvaesilva/faoebx5
 Suggests:
     knitr,
     rmarkdown
