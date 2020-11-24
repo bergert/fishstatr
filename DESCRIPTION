@@ -12,7 +12,7 @@ Imports:
     dplyr,
     data.table
 Remotes:
-    lgsilvaesilva/faoebx5
+    bergertom/faoebx5
 Suggests:
     knitr,
     rmarkdown
