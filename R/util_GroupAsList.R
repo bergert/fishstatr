@@ -13,26 +13,37 @@ utils::globalVariables(c("."))
 #'
 #' @return grouping in the format int=parent list=(child1,child2, child3...)
 #'
-#' @importFrom dplyr group_by ungroup %>% summarise_all funs
+#' @importFrom data.table data.table
 #' @export
 #'
 #'
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
 GroupAsList <- function(grouping) {
 
-  #-- first: group using the parent column
-  df1 <- grouping %>% group_by(grouping[,1])
-
-  #-- second: summarise the groups to a list
-  df2 <- df1 %>% summarise_all(funs(summary = list(.)))
-
-  #-- remove the original group column
-  colnames(df2) <- c('grouping','group','children')
-  df2$group <- NULL
-
-  return(as.data.frame(df2 %>% ungroup()))
+  # third attempt: solved using data.table
+  dt2 <- grouping[, list(list(unique(grouping[,2]))),by=grouping[,1]]
+  setattr(dt2, ".internal.selfref", NULL)
+  colnames(dt2) <- c('group','children')
+  return(as.data.frame(dt2))
 }
 
+# second attempt: cannot update dplyr on shiny server
+#GroupAsList_original <- function(grouping) {
+#
+#  #-- first: group using the parent column
+#  df1 <- grouping %>% group_by(grouping[,1])
+#
+#  #-- second: summarise the groups to a list
+#  df2 <- df1 %>% summarise_all(funs(summary = list(.)))
+#
+#  #-- remove the original group column
+#  colnames(df2) <- c('grouping','group','children')
+#  df2$group <- NULL
+#
+#  return(as.data.frame(df2 %>% ungroup()))
+#}
+
+# first attempt: cannot update dplyr on shiny server
 #GroupAsList_original <- function(grouping) {
 #
 #  #-- first: group using the parent column
@@ -43,7 +54,7 @@ GroupAsList <- function(grouping) {
 #
 #  return (df2 %>% ungroup())
 #}
-
+#
 #convert2List <- function(values) {
 #  return(tibble::tibble(children = as.list(values)))
 #}

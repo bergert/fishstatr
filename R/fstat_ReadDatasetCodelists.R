@@ -14,7 +14,6 @@
 #' top (as specified in GetDimensionGroups).
 #' It saves all objects into an RData file with the name of the dataset.
 #'
-#' @importFrom dplyr group_by group_map ungroup "%>%"
 #' @importFrom data.table data.table
 #' @importFrom utils object.size
 #' @importFrom faoebx5 EBXRead

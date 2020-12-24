@@ -20,7 +20,6 @@
 #' @return group ID's to resolve path from parent to child;
 #' in the format int=parent list=(child1,child2, child3...)
 #'
-#' @importFrom dplyr group_by group_map
 #' @importFrom data.table data.table
 #' @export
 #'

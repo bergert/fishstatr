@@ -22,7 +22,6 @@
 #'
 #' @return the resolved grouping details in the format int=parent list=(child1,child2, child3...)
 #'
-#' @importFrom dplyr group_by group_map
 #' @importFrom data.table data.table
 #' @export
 #'

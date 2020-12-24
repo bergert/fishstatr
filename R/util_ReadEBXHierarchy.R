@@ -16,8 +16,6 @@
 #'
 #' @return grouping as a \code{\link[data.table]{data.table}} with two columns(parent,child)
 #'
-#' @importFrom dplyr group_by group_map ungroup "%>%"
-#' @importFrom data.table data.table
 #' @importFrom data.table data.table
 #' @export
 #'
