@@ -12,7 +12,7 @@ The latest development version can be installed from github:
 
 ``` r
 install.packages("devtools")
-devtools::install_github('bergertom/fishstatr')
+devtools::install_github('bergert/fishstatr')
 ```
 
 ## Functions

@@ -22,12 +22,12 @@ The latest development version can be installed from github:
 
 ```{r eval=FALSE, include=TRUE}
 install.packages("devtools")
-devtools::install_github('bergertom/fishstatr')
+devtools::install_github('bergert/fishstatr')
 ```
 
 ## Functions
 
-If you come from github: [Reference/Getting started](https://bergertom.github.io/fishstatr/):
+If you come from github: [Reference/Getting started](https://bergert.github.io/fishstatr/):
 
 `fishstatR` Please, refer to the [Reference](reference/index.html) tab for more details about the functions, or you can start with examples on the page [Getting started ](articles/fishstat-r.html).
 
