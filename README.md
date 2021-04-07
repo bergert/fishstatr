@@ -18,7 +18,7 @@ devtools::install_github('bergertom/fishstatr')
 ## Functions
 
 If you come from github: [Reference/Getting
-started](s):
+started](https://bergert.github.io/fishstatr/):
 
 `fishstatR` Please, refer to the [Reference](reference/index.html) tab
 for more details about the functions, or you can start with examples on
