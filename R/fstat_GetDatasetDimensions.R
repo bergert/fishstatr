@@ -32,33 +32,24 @@ GetDatasetDimensions <- function(metadata, datasetID) {
   # get our dataset
   filter <- df[df$DatasetKey==datasetID,c('Identifier','AttributeKey')]
   attr(filter, ".internal.selfref") <- NULL
+  names(filter)[names(filter) == "Identifier"] <- "DimensionID"
 
-  # split the AttributeKey
-  result <- data.table(do.call('rbind', strsplit(as.character(filter$AttributeKey),'|',fixed=TRUE)), filter$Identifier)
-  names(result) <- c("AttributeID","ConceptID","DimensionID")
-  attr(result, ".internal.selfref") <- NULL
 
-  # resolve the concept name
-  name_en <- subset(metadata$Concept, metadata$Concept$Identifier %in% result$ConceptID, c('Identifier','Name_En', 'EBXCodelist','Acronym'))
-  name_en <- name_en %>% droplevels()
-  names(name_en)[names(name_en) == "Identifier"] <- "ConceptID"
-  name_en$ConceptID <- as.character(name_en$ConceptID)
-  name_en$Name_En <- as.character(name_en$Name_En)
-  attr(name_en, ".internal.selfref") <- NULL
+  # resolve FishStat attribute
+  fsjAttributes = metadata$Attribute[,c('Identifier','FishStat_Concept','EBX_Attribute')]
+  result <- merge.data.frame(x=filter, y=fsjAttributes, by.x = 'AttributeKey', by.y='Identifier')
+  names(result)[names(result) == "AttributeKey"] <- "AttributeID"
+  names(result)[names(result) == "FishStat_Concept"] <- "ConceptID"
 
-  # resolve the attribute name
-  attribute <- subset(metadata$Attribute, metadata$Attribute$Identifier %in% result$AttributeID, c('Identifier','EBXName'))
-  attribute <- attribute %>% droplevels()
-  names(attribute)[names(attribute) == "Identifier"] <- "AttributeID"
-  attribute$AttributeID <- as.character(attribute$AttributeID)
-  attribute$EBXName <- as.character(attribute$EBXName)
-  attr(attribute, ".internal.selfref") <- NULL
+  # add concept name
+  result <- merge.data.frame(x=result, y=metadata$Concept[,c('Identifier','Name_En','Acronym')], by.x = 'ConceptID', by.y='Identifier')
 
-  result <- merge(result, name_en, by='ConceptID')
-  attr(result, ".internal.selfref") <- NULL
-  attr(result, "sorted") <- NULL
-  result <- merge(result, attribute, by='AttributeID')
-  attr(result, ".internal.selfref") <- NULL
-  attr(result, "sorted") <- NULL
-  return(result[order(result$DimensionID)])
+  # get the EBX attribute name
+  result <- merge.data.frame(x=result, y=GetEBXAttributes()[, c('Identifier','EBX_Name','EBX_Codelist')], by.x = 'AttributeID', by.y='Identifier')
+
+  result$EBX_Attribute <- NULL
+  names(result)[names(result) == "EBX_Codelist"] <- "EBXCodelist"
+  names(result)[names(result) == "EBX_Name"] <- "EBXName"
+
+  return(result)
 }

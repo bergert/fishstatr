@@ -28,7 +28,7 @@
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
 GetCodelistByID <- function(ebxCodeList_ID) {
 
-  ebx5.cl_data <- getEbxConnection()
+  ebx5.cl_data <- GetEBXCodeLists()
   if (nrow(ebx5.cl_data[ebx5.cl_data$Identifier == ebxCodeList_ID,]) == 0) {
     stop('ebxCodeList_ID <',ebxCodeList_ID,'> is not defined in EBXCodelist metadata')
   }

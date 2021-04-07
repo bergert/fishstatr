@@ -31,23 +31,23 @@ ReadDatasetCodelists <- function(metadata, dataset_ID) {
   datasetName <- metadata$Dataset[metadata$Dataset$Identifier==dataset_ID,'Acronym']
   Dimensions <- GetDatasetDimensions(metadata, dataset_ID)
   for (dimRow in 1:nrow(Dimensions)) {
-    dimName <- Dimensions[dimRow]$Acronym
+    dimName <- Dimensions[dimRow,]$Acronym
 
     # create the Country.Codelist
-    assign(paste0(dimName,'.Codelist'), GetCodelistByID(Dimensions[dimRow]$EBXCodelist))
+    assign(paste0(dimName,'.Codelist'), GetCodelistByID(Dimensions[dimRow,]$EBXCodelist))
     objectlist <- c(objectlist, paste0(dimName,'.Codelist'))
-    print(paste0('=',dimName,'.Codelist ID=',Dimensions[dimRow]$EBXCodelist))
+    print(paste0('=',dimName,'.Codelist ID=',Dimensions[dimRow,]$EBXCodelist))
 
     # create Country.Groups
-    if (nrow(metadata$Relation[metadata$Relation$ConceptChild == Dimensions[dimRow]$ConceptID,]) == 0) {
+    if (nrow(metadata$Relation[metadata$Relation$ConceptChild == Dimensions[dimRow,]$ConceptID,]) == 0) {
       # create empty
       assign(paste0(dimName,'.Groups'), data.table())
       objectlist <- c(objectlist, paste0(dimName,'.Groups'))
     }
     else {
-      assign(paste0(dimName,'.Groups'), GetDimensionGroups(metadata, Dimensions[dimRow]$ConceptID))
+      assign(paste0(dimName,'.Groups'), GetDimensionGroups(metadata, Dimensions[dimRow,]$ConceptID))
       objectlist <- c(objectlist, paste0(dimName,'.Groups'))
-      print(paste0('=',dimName,'.Groups ID=',Dimensions[dimRow]$ConceptID))
+      print(paste0('=',dimName,'.Groups ID=',Dimensions[dimRow,]$ConceptID))
 
 
       # create Country.Groups
@@ -60,12 +60,12 @@ ReadDatasetCodelists <- function(metadata, dataset_ID) {
         assign(groupCLname, groupCL)
 
         # create Country.Continent.Groups
-        hierarchy <- ReadEBXHierarchy(groups[groupRow,'EBXCodelist'], Dimensions[dimRow]$EBXCodelist)
+        hierarchy <- ReadEBXHierarchy(groups[groupRow,'EBXCodelist'], Dimensions[dimRow,]$EBXCodelist)
         hierName <- paste0(dimName,'.',groups[groupRow,'Acronym'],'.Groups')
-        print(paste0('=',hierName,' ID=',groups[groupRow,'EBXCodelist'],'->',Dimensions[dimRow]$EBXCodelist))
+        print(paste0('=',hierName,' ID=',groups[groupRow,'EBXCodelist'],'->',Dimensions[dimRow,]$EBXCodelist))
         if (nrow(hierarchy) == 0) {
           stop(paste('hierarchy ',hierName,' ID=', groups[groupRow,'EBXCodelist'],'->',
-                     Dimensions[dimRow]$EBXCodelist),' does not have any data')
+                     Dimensions[dimRow,]$EBXCodelist),' does not have any data')
         }
         assign(hierName, hierarchy)
         hierarchy <- hierarchy[,c(1,2)]

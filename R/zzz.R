@@ -8,6 +8,7 @@ ebx5_env <- new.env()
 assign("ebx5.connection", NULL, envir = ebx5_env)
 assign("ebx5.cl_data", NULL, envir = ebx5_env)
 assign("ebx5.gr_data", NULL, envir = ebx5_env)
+assign("ebx5.attrib_data", NULL, envir = ebx5_env)
 
 # Establish initial credentials for the Comtrade API.
 .onLoad <- function(libname, pkgname) {

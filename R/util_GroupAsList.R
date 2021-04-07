@@ -14,14 +14,17 @@ utils::globalVariables(c("."))
 #' @return grouping in the format int=parent list=(child1,child2, child3...)
 #'
 #' @importFrom data.table data.table
-#' @export
 #'
+#' @export
 #'
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
 GroupAsList <- function(grouping) {
 
+  dt1 <- data.table(grouping[,1:2])
+  colnames(dt1) <- c('group','member')
+
   # third attempt: solved using data.table
-  dt2 <- grouping[, list(list(unique(grouping[,2]))),by=grouping[,1]]
+  dt2 <- dt1[, list(list(member)), by=group]
   setattr(dt2, ".internal.selfref", NULL)
   colnames(dt2) <- c('group','children')
   return(as.data.frame(dt2))

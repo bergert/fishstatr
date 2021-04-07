@@ -1,12 +1,12 @@
 ---
-title: 'faoebx5 Getting started'
+title: 'The fishstatR package'
 date: '`r Sys.Date()`'
 output:
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 3
     vignette: >
-      %\VignetteIndexEntry{faoebx5-overview}
+      %\VignetteIndexEntry{The fishstatR package}
       %\VignetteEngine{knitr::rmarkdown}
       %\VignetteEncoding{UTF-8}
 ---
@@ -175,11 +175,31 @@ result <- ReadEBXHierarchy(306,301)
 # [1] 12751
 ```
 
+
+## GroupAsList
+Converts a data frame group (first column: group, second column: member) into a 
+data table, where group appears only once, and members are converted to a list.
+The is an essential utlity function, for use with applicaitons. It is also used
+by the library when flattening (combining) multiple levels of hierarchies.
+
+```{r GroupAsList, eval=F, include=TRUE}
+result <- GroupAsList(data.frame(group=c(1,1,1,2,2,3),member=c(11,12,13,21,22,31)))
+#'  group   children
+# 1     1 11, 12, 13
+# 2     2     21, 22
+# 3     3         31
+```
+
 ## GetEBXHierarchy
 This a convenience function; same as `ReadEBXHierarchy()` but uses codelist names. 
-The result can be resolved to a grouping by `ReadEBXHierarchy()`
+The result is resolved to a grouping by `ReadEBXHierarchy()`
 ```{r -GetEBXHierarchy, eval=F, include=TRUE}
  GetEBXHierarchy('CL_FI_SPECIES_MAJOR', 'CL_FI_SPECIES_ITEM')
+# [1] "  parentID=306, childID=307, sdmxGroupName=HCL_FI_SPECIES_MAJOR_ORDER"
+# [1] "  parentID=307, childID=302, sdmxGroupName=HCL_FI_SPECIES_ORDER_FAMILY"
+# [1] "  parentID=302, childID=301, sdmxGroupName=HCL_FI_SPECIES_FAMILY_ITEM"
+# [1] "  parentID=306, childID=307, sdmxGroupName=HCL_FI_SPECIES_MAJOR_ORDER"
+# [1] "  parentID=307, childID=301, sdmxGroupName=HCL_FI_SPECIES_ORDER_ITEM"
 ```
 
 ## ReadDatasetCodelists

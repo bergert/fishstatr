@@ -12,6 +12,7 @@
 #' @return Returns an object of the class \code{\link[data.table]{data.table}}
 #'
 #' @import data.table
+#' @importFrom dplyr %>%
 #'
 #' @export
 #'
@@ -25,7 +26,7 @@ GetDimensionGroups <- function(metadata, dimensionConceptID) {
     stop('dimensionConceptID is required')
   }
   if (nrow(metadata$Relation[metadata$Relation$ConceptChild == dimensionConceptID,]) == 0) {
-    stop('dimensionConceptID=<',dimensionConceptID,'> is not defined in FishStat.Realation')
+    stop('dimensionConceptID=<',dimensionConceptID,'> is not defined in FishStat.Relation')
   }
 
   # get the ID's of the relations

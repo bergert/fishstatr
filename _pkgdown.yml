@@ -1,4 +1,4 @@
-url: http://bergertom.github.io/fishstatr
+url: http://bergert.github.io/fishstatr
 
 template:
   params:
@@ -6,14 +6,12 @@ template:
 
 author:
   Thomas Berger:
-    href: https://bergertom.github.io
+    href: https://bergert.github.io/fishstatr
 
 home:
   links:
   - text: Browse source code at
-    href: https://github.com/bergertom/fishstatr
-  - text: Report a bug at
-    href: https://github.com/bergertom/fishstatr/issues
+    href: https://github.com/bergert/fishstatr
 
 reference:
   - title: The fishstatR package
@@ -25,6 +23,7 @@ reference:
     - GetEBXCodeLists
     - GetEBXGroups
     - GetEBXHierarchy
+    - GetEBXAttributes
     - ReadDatasetCodelists
 
   - title: Codelist manipulation

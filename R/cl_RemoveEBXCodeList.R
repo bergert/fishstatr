@@ -10,11 +10,7 @@
 #' The actual codelist location in EBX5 (branch, instance, code-list-name) are resolved
 #' using the metadata structure.
 #'
-#' @inheritParams InsertEBXCodeList
-#'
 #' @return boolean
-#'
-#' @importFrom faoebx5 GetEBXConnection
 #'
 #' @details For a delete operation, data must specify all keys of the code-list to uniqely idetify the rows.
 #' Using the SOAP-API the column name is not the label visible in EBX, but the field name.

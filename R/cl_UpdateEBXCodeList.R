@@ -9,11 +9,7 @@
 #' The actual codelist location in EBX5 (branch, instance, code-list-name) are resolved
 #' using the metadata structure.
 #'
-#' @inheritParams InsertEBXCodeList
-#'
 #' @return boolean
-#'
-#' @importFrom faoebx5 GetEBXConnection
 #'
 #' @details Note that the udpated rows must have the same columns name os the table that will be updated.
 #'

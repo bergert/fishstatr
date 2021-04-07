@@ -4,10 +4,6 @@
 #' data rows into a code list stored in EBX5 through R.
 #'
 #' @param data a \code{\link[base]{data.frame}} containing all columns to be be inserted
-#' @param sdmx_codelist_name code list name, in SDMX style.
-#' Available code lists are shown by function \code{\link{GetEBXCodeLists}} in the field "Acronym".
-#' The actual codelist location in EBX5 (branch, instance, code-list-name) are resolved
-#' using the metadata structure.
 #'
 #' @inheritParams ReadEBXCodeList
 #'
