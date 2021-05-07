@@ -1,13 +1,14 @@
 #' @title Read FishStat CSV files
 #'
-#' @description CSV files are files, which are created as download file. They are virtual or synthetic, as
+#' @description CSV files are files, which are created as flat structure. They are virtual or synthetic, as
 #' the attributes are picked from a single EBX code-list. Additional attributes can be defined from
 #' parent hierachies. The grouping is resolved by fishstatR, and shown with the defined column header in the CSV.
 #' It is not possible to mix attributes from several code-lists.
+#' This function returns a data.frame which is ready (as-is) to be saved to a CSV file.
 #'
 #' @param csv_file acronym obtained by \code{\link{GetCSVfiles}}
 #'
-#' @return Returns the CSV file as an object of the class \code{\link[data.table]{data.table}}
+#' @return Returns the CSV file as an object of the class \code{\link[data.frame]{data.frame}}
 #'
 #' @export
 #'

@@ -4,6 +4,9 @@
     <loc>https://bergert.github.io/fishstatr/index.html</loc>
   </url>
   <url>
+    <loc>https://bergert.github.io/fishstatr/reference/GetCSVfiles.html</loc>
+  </url>
+  <url>
     <loc>https://bergert.github.io/fishstatr/reference/GetCodelistByID.html</loc>
   </url>
   <url>
@@ -38,6 +41,9 @@
   </url>
   <url>
     <loc>https://bergert.github.io/fishstatr/reference/InsertEBXGroup.html</loc>
+  </url>
+  <url>
+    <loc>https://bergert.github.io/fishstatr/reference/ReadCSVfile.html</loc>
   </url>
   <url>
     <loc>https://bergert.github.io/fishstatr/reference/ReadDatasetCodelists.html</loc>
