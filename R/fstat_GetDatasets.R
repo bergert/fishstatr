@@ -1,7 +1,7 @@
 #' @title Get FishStat Datasets
 #'
 #' @description This is a convenience function to make it easier to get started usign data
-#' from EBX5. It provides a dataset name, and the Dataset-Identifier required by other fucntions.
+#' from EBX5. It provides a dataset name, and the Dataset-Identifier required by other functions.
 #'
 #' @param metadata FishStat metadata; obtained using \code{\link{ReadMetadata}}
 #'

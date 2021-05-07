@@ -41,7 +41,7 @@ GetEBXAttributes <- function(connection = NA) {
       table='EBXAttribute',
       connection=connection)
 
-    if (is.null(ebx5.cl_data)) {
+    if (is.null(ebx5.attrib_data)) {
       stop('Cannot load [ebx5.attrib_data]')
     }
     assign("ebx5.attrib_data", ebx5.attrib_data, envir = ebx5_env)

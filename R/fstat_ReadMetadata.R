@@ -30,9 +30,9 @@ ReadMetadata <- function() {
   fsj_Attribute <- ReadEBXCodeList('FSJ_ATTRIBUTE')
   fsj_Measure   <- ReadEBXCodeList('FSJ_MEASURE')
 
-  fsj_Workspace2Dataset <- ReadEBXGroup('FSJ_GROUP_WORKSPACE_DATASET')
-  fsj_Dataset2Concept   <- ReadEBXGroup('FSJ_GROUP_DATASET_CONCEPT')
-  fsj_Dataset2Relation  <- ReadEBXGroup('FSJ_GROUP_DATASET_RELATION')
+  fsj_Workspace2Dataset <- ReadEBXGroup('HCL_FSJ_WORKSPACE_DATASET')
+  fsj_Dataset2Concept   <- ReadEBXGroup('HCL_FSJ_DATASET_CONCEPT')
+  fsj_Dataset2Relation  <- ReadEBXGroup('HCL_FSJ_DATASET_RELATION')
 
   fsj_Metadata <- list('Workspace'  = fsj_Workspace,
                        'Dataset'    = fsj_Dataset,

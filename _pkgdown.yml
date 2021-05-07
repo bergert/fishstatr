@@ -1,4 +1,4 @@
-url: http://bergert.github.io/fishstatr
+url: https://bergert.github.io/fishstatr
 
 template:
   params:
@@ -39,6 +39,11 @@ reference:
     - InsertEBXGroup
     - UpdateEBXGroup
     - RemoveEBXGroup
+
+  - title: CSV files
+    contents:
+    - GetCSVfiles
+    - ReadCSVfile
 
   - title: FishStat metadata
     contents:
