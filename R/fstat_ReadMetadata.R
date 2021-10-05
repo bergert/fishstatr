@@ -29,6 +29,8 @@ ReadMetadata <- function() {
   fsj_Relation  <- ReadEBXCodeList('FSJ_RELATION')
   fsj_Attribute <- ReadEBXCodeList('FSJ_ATTRIBUTE')
   fsj_Measure   <- ReadEBXCodeList('FSJ_MEASURE')
+  fsj_Unit      <- ReadEBXCodeList('FSJ_UNIT')
+  fsj_Period    <- ReadEBXCodeList('FSJ_PERIOD')
 
   fsj_Workspace2Dataset <- ReadEBXGroup('HCL_FSJ_WORKSPACE_DATASET')
   fsj_Dataset2Concept   <- ReadEBXGroup('HCL_FSJ_DATASET_CONCEPT')
@@ -42,6 +44,8 @@ ReadMetadata <- function() {
                        'Relation'   = fsj_Relation,
                        'Attribute'  = fsj_Attribute,
                        'Measure'    = fsj_Measure,
+                       'Unit'       = fsj_Unit,
+                       'Period'     = fsj_Period,
                        'Workspace2Dataset' = fsj_Workspace2Dataset,
                        'Dataset2Concept'   = fsj_Dataset2Concept,
                        'Dataset2Relation'  = fsj_Dataset2Relation)

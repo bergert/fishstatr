@@ -19,7 +19,7 @@
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
 GetDatasetDimensions <- function(metadata, datasetID) {
 
-  if (!is.list(metadata) || length(names(metadata))!=11) {
+  if (!is.list(metadata) || length(names(metadata))!=13) {
     stop('metadata is not valid for FishStat')
   }
   if (!is.data.frame(metadata$Dimension) || !is.data.frame(metadata$Concept)) {
@@ -30,7 +30,7 @@ GetDatasetDimensions <- function(metadata, datasetID) {
   df <- metadata$Dimension
 
   # get our dataset
-  filter <- df[df$DatasetKey==datasetID,c('Identifier','AttributeKey')]
+  filter <- df[df$DatasetKey==datasetID,c('Identifier','AttributeKey','SWS_Dimension')]
   attr(filter, ".internal.selfref") <- NULL
   names(filter)[names(filter) == "Identifier"] <- "DimensionID"
 

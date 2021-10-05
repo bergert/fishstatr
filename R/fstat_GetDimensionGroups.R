@@ -19,7 +19,7 @@
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
 GetDimensionGroups <- function(metadata, dimensionConceptID) {
 
-  if (!is.list(metadata) || length(names(metadata))!=11 || !is.data.frame(metadata$Relation)) {
+  if (!is.list(metadata) || length(names(metadata))!=13 || !is.data.frame(metadata$Relation)) {
     stop('metadata is not valid for FishStat')
   }
   if (missing(dimensionConceptID)){

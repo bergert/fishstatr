@@ -61,4 +61,5 @@ reference:
     - GroupAsList
     - getEbxConnection
     - ReadEBXHierarchy
+    - LookupUnit
 

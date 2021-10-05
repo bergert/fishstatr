@@ -1,7 +1,7 @@
 #' @title Read a complete group hierarchy, for use with applications
 #'
 #' @param metadata FishStat metadata; obtained using \code{\link{ReadMetadata}}
-#' @param dataset_ID dataset Identifier obtained using \code{\link{GetDatasets}}
+#' @param timeseries_ID timeseries identifier obtained using \code{\link{GetTimeseries}}
 #'
 #' @seealso \code{\link{GetDimensionGroups}} and \code{\link{ReadEBXHierarchy}}.
 #'
@@ -21,15 +21,43 @@
 #' @export
 #'
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
-ReadDatasetCodelists <- function(metadata, dataset_ID) {
+ReadDatasetCodelists <- function(metadata, timeseries_ID) {
 
-  if (!is.list(metadata) || length(names(metadata))!=11) {
+  if (!is.list(metadata) || length(names(metadata))!=13) {
     stop('metadata is not valid for FishStat')
   }
 
-  objectlist <- c('Dimensions')
+  # filter out query panel
+  timeseries <- metadata$Timeseries[metadata$Timeseries$isFishStatJ == 'true' & metadata$Timeseries$Query_Panel == 'true',]
+  timeseries$isFishStatJ <- NULL
+  timeseries$Query_Panel <- NULL
+
+  if (nrow(timeseries[timeseries$Identifier == timeseries_ID,]) == 0) {
+    stop('timeseries_ID=<',timeseries_ID,'> is not defined in FishStat.Timeseries')
+  }
+
+  # Dimensions
   datasetName <- metadata$Dataset[metadata$Dataset$Identifier==dataset_ID,'Acronym']
   Dimensions <- GetDatasetDimensions(metadata, dataset_ID)
+  objectlist <- c('Dimensions')
+
+  # Timeseries
+  Timeseries <- timeseries[timeseries$Identifier == timeseries_ID,]
+  dataset_ID <- as.numeric(Timeseries$DatasetKey)
+  objectlist <- c(objectlist, 'Timeseries')
+
+  # Unit
+  if (nrow(metadata$Measure[metadata$Measure$TimeseriesKey == Timeseries$Identifier & metadata$Measure$Acronym == 'UNIT',]) == 0) {
+    stop('timeseries_ID=<',timeseries_ID,'> has no Measure.UNIT defined')
+  }
+  unitValue <- metadata$Measure$Value[metadata$Measure$TimeseriesKey == Timeseries$Identifier & metadata$Measure$Acronym == 'UNIT']
+  Unit <- LookupUnit(metadata, unitValue)
+  objectlist <- c(objectlist, 'Unit')
+
+  # Period
+  Period <- metadata$Period[metadata$Period$TimeseriesKey == timeseries_ID,]
+  objectlist <- c(objectlist, 'Period')
+
   for (dimRow in 1:nrow(Dimensions)) {
     dimName <- Dimensions[dimRow,]$Acronym
 
@@ -77,6 +105,7 @@ ReadDatasetCodelists <- function(metadata, dataset_ID) {
       }
     }
   }
+
   print(paste0('=== saved ',length(objectlist),' to ',datasetName,'.RData, size=', sum(sapply(objectlist,function(x){object.size(get(x))})) ))
   save(list=objectlist, file = paste0(datasetName,'.RData'))
 }

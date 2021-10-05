@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   fishstat-r: fishstat-r.html
-last_built: 2021-05-07T12:35Z
+last_built: 2021-10-05T09:38Z
 urls:
   reference: https://bergert.github.io/fishstatr/reference
   article: https://bergert.github.io/fishstatr/articles
