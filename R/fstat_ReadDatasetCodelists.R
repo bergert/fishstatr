@@ -36,15 +36,15 @@ ReadDatasetCodelists <- function(metadata, timeseries_ID) {
     stop('timeseries_ID=<',timeseries_ID,'> is not defined in FishStat.Timeseries')
   }
 
-  # Dimensions
-  datasetName <- metadata$Dataset[metadata$Dataset$Identifier==dataset_ID,'Acronym']
-  Dimensions <- GetDatasetDimensions(metadata, dataset_ID)
-  objectlist <- c('Dimensions')
-
   # Timeseries
   Timeseries <- timeseries[timeseries$Identifier == timeseries_ID,]
   dataset_ID <- as.numeric(Timeseries$DatasetKey)
-  objectlist <- c(objectlist, 'Timeseries')
+  objectlist <- c('Timeseries')
+
+  # Dimensions
+  datasetName <- metadata$Dataset[metadata$Dataset$Identifier==dataset_ID,'Acronym']
+  Dimensions <- GetDatasetDimensions(metadata, dataset_ID)
+  objectlist <- c(objectlist, 'Dimensions')
 
   # Unit
   if (nrow(metadata$Measure[metadata$Measure$TimeseriesKey == Timeseries$Identifier & metadata$Measure$Acronym == 'UNIT',]) == 0) {
@@ -89,15 +89,18 @@ ReadDatasetCodelists <- function(metadata, timeseries_ID) {
 
         # create Country.Continent.Groups
         hierarchy <- ReadEBXHierarchy(groups[groupRow,'EBXCodelist'], Dimensions[dimRow,]$EBXCodelist)
-        hierName <- paste0(dimName,'.',groups[groupRow,'Acronym'],'.Groups')
-        print(paste0('=',hierName,' ID=',groups[groupRow,'EBXCodelist'],'->',Dimensions[dimRow,]$EBXCodelist))
         if (nrow(hierarchy) == 0) {
+          print(paste('from=',groups[groupRow,'EBXCodelist'],", to=",Dimensions[dimRow,]$EBXCodelist))
+          print(groups)
+          print(Dimensions)
           stop(paste('hierarchy ',hierName,' ID=', groups[groupRow,'EBXCodelist'],'->',
                      Dimensions[dimRow,]$EBXCodelist),' does not have any data')
         }
+        hierName <- paste0(dimName,'.',groups[groupRow,'Acronym'],'.Groups')
+        print(paste0('=',hierName,' ID=',groups[groupRow,'EBXCodelist'],'->',Dimensions[dimRow,]$EBXCodelist))
         assign(hierName, hierarchy)
         hierarchy <- hierarchy[,c(1,2)]
-        colnames(hierarchy) <- c('group', 'member')
+        colnames(hierarchy) <- c('Group', 'Member')
         assign(paste0(hierName,'.2'), GroupAsList(hierarchy))
 
         objectlist <- c(objectlist,hierName)

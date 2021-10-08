@@ -21,12 +21,12 @@ utils::globalVariables(c("."))
 GroupAsList <- function(grouping) {
 
   dt1 <- data.table(grouping[,1:2])
-  colnames(dt1) <- c('group','member')
+  colnames(dt1) <- c('Group','Member')
 
   # third attempt: solved using data.table
-  dt2 <- dt1[, list(list(member)), by=group]
+  dt2 <- dt1[, list(list(Member)), by=Group]
   setattr(dt2, ".internal.selfref", NULL)
-  colnames(dt2) <- c('group','children')
+  colnames(dt2) <- c('Group','Children')
   return(as.data.frame(dt2))
 }
 

@@ -49,6 +49,7 @@ reference:
     contents:
     - ReadMetadata
     - GetDatasets
+    - GetTimeseries
     - GetDatasetDimensions
     - GetDimensionGroups
     - ReadDatasetCodelists

@@ -85,16 +85,16 @@ getGrouping <- function(solution) {
 combineLevels <- function(level1, level2) {
 
   # prepare column names for merge
-  colnames(level1) <- c('L1.group', 'L1.member')
-  colnames(level2) <- c('L2.group', 'L2.member')
+  colnames(level1) <- c('L1.Group', 'L1.Member')
+  colnames(level2) <- c('L2.Group', 'L2.Member')
 
   # inner join (level1, level2)
-  result <-merge (x=level1[1:2],y=level2[1:2], by.x='L1.member', by.y='L2.group')
+  result <-merge (x=level1[1:2],y=level2[1:2], by.x='L1.Member', by.y='L2.Group')
 
   # drop the join column
-  result['L1.member'] <- NULL
+  result['L1.Member'] <- NULL
 
-  colnames(result) <- c('group', 'member')
+  colnames(result) <- c('Group', 'Member')
 
   return(result)
 }
@@ -104,8 +104,8 @@ combineLevels <- function(level1, level2) {
 ##############################################################################################
 mergeRelation  <- function(merge1, merge2) {
 
-  colnames(merge1) <- c('group', 'member')
-  colnames(merge2) <- c('group', 'member')
+  colnames(merge1) <- c('Group', 'Member')
+  colnames(merge2) <- c('Group', 'Member')
 
   return(rbind(merge1[1:2], merge2[1:2]))
 }

@@ -11,6 +11,11 @@
 #'
 #' @return Return an object of the class \code{\link[data.table]{data.table}}.
 #'
+#' @details The first column called 'Group' defines the parent codes. The second
+#' column called 'Member' defines the child identifier. Additional colunmns may
+#' be used to define the grouping like start/end year.
+#' The correct names and order must be used when defining the EBX5 data model.
+#'
 #' @import data.table
 #' @importFrom faoebx5 GetEBXConnection EBXRead
 #'
@@ -24,5 +29,7 @@
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
 ReadEBXGroup <- function(sdmx_group_name) {
 
-  request_read(.sdmx_name=sdmx_group_name, .isCodeList = FALSE)
+  result <- request_read(.sdmx_name=sdmx_group_name, .isCodeList = FALSE)
+  colnames(result) <- c('Group', 'Member')
+  return (result)
 }

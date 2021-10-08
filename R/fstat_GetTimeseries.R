@@ -1,7 +1,7 @@
-#' @title Get FishStat Datasets
+#' @title Get FishStat Timeseries
 #'
 #' @description This is a convenience function to make it easier to get started using data
-#' from EBX5. It provides a dataset name, and the Dataset-Identifier required by other functions.
+#' from EBX5. It provides a timeseries name, and the Timeseries-Identifier required by other functions.
 #'
 #' @param metadata FishStat metadata; obtained using \code{\link{ReadMetadata}}
 #'
@@ -13,11 +13,11 @@
 #' @export
 #'
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
-GetDatasets <- function(metadata) {
+GetTimeseries <- function(metadata) {
 
   if (!is.list(metadata) || length(names(metadata))!=13 || !is.data.frame(metadata$Dataset)) {
     stop('metadata is not valid for FishStat')
   }
 
-  return(metadata$Dataset[,c('Identifier','Acronym','Name_En')])
+  return(metadata$Timeseries[metadata$Timeseries$isFishStatJ=='true',c('Identifier','Acronym','Name_En','Description_En','DatasetKey')])
 }
