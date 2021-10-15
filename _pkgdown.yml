@@ -63,4 +63,5 @@ reference:
     - getEbxConnection
     - ReadEBXHierarchy
     - LookupUnit
+    - GetCodelistWithName
 

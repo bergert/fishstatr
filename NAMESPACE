@@ -2,6 +2,7 @@
 
 export(GetCSVfiles)
 export(GetCodelistByID)
+export(GetCodelistWithName)
 export(GetDatasetDimensions)
 export(GetDatasets)
 export(GetDimensionGroups)

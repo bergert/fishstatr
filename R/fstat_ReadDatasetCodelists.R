@@ -58,11 +58,27 @@ ReadDatasetCodelists <- function(metadata, timeseries_ID) {
   Period <- metadata$Period[metadata$Period$TimeseriesKey == timeseries_ID,]
   objectlist <- c(objectlist, 'Period')
 
+  # Concepts
+  conceptIDs <- metadata$Dataset2Concept[metadata$Dataset2Concept$Group==1,'Member']
+  Concepts <- metadata$Concept[metadata$Concept$Identifier %in% conceptIDs,]
+  EbxConcept<-ReadEBXCodeList('EBX5_METADATA_CODELIST')
+  EbxConcept <- EbxConcept[EbxConcept$Identifier %in% Concepts$EBXCodelist,c('Identifier','Acronym')]
+  colnames(EbxConcept) <- c('EBXCodelist', 'EBXCodelist_Name')
+  Concepts <- merge(Concepts, EbxConcept, by="EBXCodelist")
+  objectlist <- c(objectlist, 'Concepts')
+
+  # Attributes
+  Attributes <- metadata$Attribute[metadata$Attribute$FishStat_Concept %in% conceptIDs,]
+  EbxAttribute <- ReadEBXCodeList('EBX5_METADATA_ATTRIBUTE')
+  EbxAttribute <- EbxAttribute[EbxAttribute$Identifier %in% Attributes$EBX_Attribute, c('Identifier','EBX_Name','Type','Size','Scale')]
+  names(EbxAttribute)[names(EbxAttribute) == "Identifier"] <- "EBX_Attribute"
+  Attributes <- merge(Attributes, EbxAttribute, by="EBX_Attribute")
+  objectlist <- c(objectlist, 'Attributes')
+
   for (dimRow in 1:nrow(Dimensions)) {
     dimName <- Dimensions[dimRow,]$Acronym
 
-    # create the Country.Codelist
-    assign(paste0(dimName,'.Codelist'), GetCodelistByID(Dimensions[dimRow,]$EBXCodelist))
+    assign(paste0(dimName,'.Codelist'), GetCodelistWithName(metadata, Dimensions[dimRow,]$ConceptID))
     objectlist <- c(objectlist, paste0(dimName,'.Codelist'))
     print(paste0('=',dimName,'.Codelist ID=',Dimensions[dimRow,]$EBXCodelist))
 
@@ -77,14 +93,15 @@ ReadDatasetCodelists <- function(metadata, timeseries_ID) {
       objectlist <- c(objectlist, paste0(dimName,'.Groups'))
       print(paste0('=',dimName,'.Groups ID=',Dimensions[dimRow,]$ConceptID))
 
-
       # create Country.Groups
       groups <- get(paste0(dimName,'.Groups'))
       for (groupRow in 1:nrow(groups)) {
         # create Country.Continent.Codelist
         groupCLname <- paste0(dimName,'.',groups[groupRow,'Acronym'],'.Codelist')
         objectlist <- c(objectlist, groupCLname)
-        groupCL <- GetCodelistByID(groups[groupRow,'EBXCodelist'])
+
+        groupCL <- GetCodelistWithName(metadata, groups[groupRow,'Identifier'])
+        #groupCL <- GetCodelistByID(groups[groupRow,'EBXCodelist'])
         assign(groupCLname, groupCL)
 
         # create Country.Continent.Groups
@@ -110,6 +127,6 @@ ReadDatasetCodelists <- function(metadata, timeseries_ID) {
   }
 
   print(paste0('=== saved ',length(objectlist),' to ',datasetName,'.RData, size=', sum(sapply(objectlist,function(x){object.size(get(x))})) ))
-  save(list=objectlist, file = paste0(datasetName,'.RData'))
+  save(list=objectlist, file = paste0('Timeseries_',timeseries_ID,'.RData'))
 }
 
