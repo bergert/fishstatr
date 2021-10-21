@@ -70,7 +70,7 @@ ReadDatasetCodelists <- function(metadata, timeseries_ID) {
   # Attributes
   Attributes <- metadata$Attribute[metadata$Attribute$FishStat_Concept %in% conceptIDs,]
   EbxAttribute <- ReadEBXCodeList('EBX5_METADATA_ATTRIBUTE')
-  EbxAttribute <- EbxAttribute[EbxAttribute$Identifier %in% Attributes$EBX_Attribute, c('Identifier','EBX_Name','Type','Size','Scale')]
+  EbxAttribute <- EbxAttribute[EbxAttribute$Identifier %in% Attributes$EBX_Attribute, c('Identifier','EBX_Name','Type','Size','Scale','Name_En','Description_En')]
   names(EbxAttribute)[names(EbxAttribute) == "Identifier"] <- "EBX_Attribute"
   Attributes <- merge(Attributes, EbxAttribute, by="EBX_Attribute")
   objectlist <- c(objectlist, 'Attributes')
