@@ -1,99 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://bergert.github.io/fishstatr/index.html</loc>
+    <loc>/404.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetCSVfiles.html</loc>
+    <loc>/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetCodelistByID.html</loc>
+    <loc>/articles/fishstat-r.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetCodelistWithName.html</loc>
+    <loc>/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetDatasetDimensions.html</loc>
+    <loc>/authors.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetDatasets.html</loc>
+    <loc>/index.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetDimensionGroups.html</loc>
+    <loc>/reference/GetCSVfiles.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetEBXAttributes.html</loc>
+    <loc>/reference/GetCodelistByID.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetEBXCodeLists.html</loc>
+    <loc>/reference/GetCodelistWithName.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetEBXGroups.html</loc>
+    <loc>/reference/GetDatasetDimensions.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetEBXHierarchy.html</loc>
+    <loc>/reference/GetDatasets.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetGroupConnectionIDs.html</loc>
+    <loc>/reference/GetDimensionGroups.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GetTimeseries.html</loc>
+    <loc>/reference/GetEBXAttributes.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/GroupAsList.html</loc>
+    <loc>/reference/GetEBXCodeLists.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/InsertEBXCodeList.html</loc>
+    <loc>/reference/GetEBXGroups.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/InsertEBXGroup.html</loc>
+    <loc>/reference/GetEBXHierarchy.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/LookupUnit.html</loc>
+    <loc>/reference/GetGroupConnectionIDs.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/ReadCSVfile.html</loc>
+    <loc>/reference/GetTimeseries.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/ReadDatasetCodelists.html</loc>
+    <loc>/reference/GroupAsList.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/ReadEBXCodeList.html</loc>
+    <loc>/reference/InsertEBXCodeList.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/ReadEBXGroup.html</loc>
+    <loc>/reference/InsertEBXGroup.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/ReadEBXHierarchy.html</loc>
+    <loc>/reference/LookupUnit.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/ReadMetadata.html</loc>
+    <loc>/reference/ReadCSVfile.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/RemoveEBXCodeList.html</loc>
+    <loc>/reference/ReadDatasetCodelists.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/RemoveEBXGroup.html</loc>
+    <loc>/reference/ReadEBXCodeList.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/UpdateEBXCodeList.html</loc>
+    <loc>/reference/ReadEBXGroup.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/UpdateEBXGroup.html</loc>
+    <loc>/reference/ReadEBXHierarchy.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/fishstatr.html</loc>
+    <loc>/reference/ReadMetadata.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/getEbxConnection.html</loc>
+    <loc>/reference/RemoveEBXCodeList.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/request_read.html</loc>
+    <loc>/reference/RemoveEBXGroup.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/reference/request_update.html</loc>
+    <loc>/reference/UpdateEBXCodeList.html</loc>
   </url>
   <url>
-    <loc>https://bergert.github.io/fishstatr/articles/fishstat-r.html</loc>
+    <loc>/reference/UpdateEBXGroup.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fishstatr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/getEbxConnection.html</loc>
+  </url>
+  <url>
+    <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/request_read.html</loc>
+  </url>
+  <url>
+    <loc>/reference/request_update.html</loc>
   </url>
 </urlset>

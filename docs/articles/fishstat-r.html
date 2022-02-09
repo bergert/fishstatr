@@ -4,81 +4,66 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="fishstatr">
 <title>The fishstatR package • fishstatr</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="The fishstatR package">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The fishstatR package">
 <meta property="og:description" content="fishstatr">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">fishstatr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">fishstatr</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.4</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-2">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/fishstat-r.html">The fishstatR package</a>
-    </li>
-  </ul>
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/fishstat-r.html">The fishstatR package</a>
+  </div>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav"></ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
+</nav><div class="container template-article">
 
-      
-
-      </header><script src="fishstat-r_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>The fishstatR package</h1>
+<div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>The fishstatR package</h1>
             
-            <h4 class="date">2021-10-15</h4>
+            <h4 data-toc-skip class="date">2022-02-09</h4>
       
       
-      <div class="hidden name"><code>fishstat-r.Rmd</code></div>
-
+      <div class="d-none name"><code>fishstat-r.Rmd</code></div>
     </div>
 
     
@@ -86,55 +71,55 @@
 <p>This library builds on the <code>faoexb5</code> lbrary for basic connectivity.</p>
 <p><code>fishstatr</code> is a companion library, which uses a Metadata structure to allow programs to discover available objects in EBX5, their attributes and connections. As Metadata are user-created tables in EBX5, they can be maintained by the same users upadting the schema.</p>
 <p>Using this library allows the program to access reference-data, whithout having to know the exact location: It allows users to move things in EBX5 wthout breaking the programs. Code-lists and Groups are accessed using the Acronym (SDMX name).</p>
-<div id="getebxcodelists" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getebxcodelists" class="anchor"></a>GetEBXCodeLists()</h2>
+<div class="section level2">
+<h2 id="getebxcodelists">GetEBXCodeLists()<a class="anchor" aria-label="anchor" href="#getebxcodelists"></a>
+</h2>
 <p>This function returns the index of code lists defined in the folder <code>Metadata</code>, table name <code>EBXCodelist</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">faoebx5</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">fishstatr</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">faoebx5</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">fishstatr</span><span class="op">)</span>
 <span class="fu"><a href="../reference/GetEBXCodeLists.html">GetEBXCodeLists</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#   Identifier                        Acronym       Folder                   Name  Branch Instance</span>
 <span class="co"># 6         100      CL_FI_COMMODITY_CPC_CLASS    Commodity              CPC_Class Fishery  Fishery</span>
 <span class="co"># 7         101   CL_FI_COMMODITY_CPC_DIVISION    Commodity           CPC_Division Fishery  Fishery</span></code></pre></div>
 </div>
-<div id="getebxgroups" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getebxgroups" class="anchor"></a>GetEBXGroups()</h2>
+<div class="section level2">
+<h2 id="getebxgroups">GetEBXGroups()<a class="anchor" aria-label="anchor" href="#getebxgroups"></a>
+</h2>
 <p>This function returns the index of code lists defined in the folder <code>Metadata</code>, table name <code>EBXGroup</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">faoebx5</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">fishstatr</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">faoebx5</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">fishstatr</span><span class="op">)</span>
 <span class="fu"><a href="../reference/GetEBXGroups.html">GetEBXGroups</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#   Identifier                                Acronym from  to          Folder                              Name  Branch Instance</span>
 <span class="co"># 1         100       HCL_FI_COMMODITY_CPCCLASS_ISSCFC  100 113    CommodityGrp             Group_CPCClass_ISSCFC Fishery  Fishery</span>
 <span class="co"># 2         101      HCL_FI_COMMODITY_CPCCLASS_SPECIES  100 301    CommodityGrp            Group_CPCClass_Species Fishery  Fishery</span></code></pre></div>
 </div>
-<div id="readebxcodelist" class="section level2">
-<h2 class="hasAnchor">
-<a href="#readebxcodelist" class="anchor"></a>ReadEBXCodeList()</h2>
+<div class="section level2">
+<h2 id="readebxcodelist">ReadEBXCodeList()<a class="anchor" aria-label="anchor" href="#readebxcodelist"></a>
+</h2>
 <p>This function returns code-list.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># reading a code-list using the Acronym</span>
 <span class="fu"><a href="../reference/ReadEBXCodeList.html">ReadEBXCodeList</a></span><span class="op">(</span><span class="st">'CL_FI_COMMODITY_FAO_LEVEL1'</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="readebxgroup" class="section level2">
-<h2 class="hasAnchor">
-<a href="#readebxgroup" class="anchor"></a>ReadEBXGroup()</h2>
+<div class="section level2">
+<h2 id="readebxgroup">ReadEBXGroup()<a class="anchor" aria-label="anchor" href="#readebxgroup"></a>
+</h2>
 <p>This function returns group.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># reading a group using the Acronym</span>
 <span class="fu"><a href="../reference/ReadEBXGroup.html">ReadEBXGroup</a></span><span class="op">(</span><span class="st">'HCL_FI_COMMODITY_FAOL1_FAOL2'</span><span class="op">)</span></code></pre></div>
 <hr>
 </div>
-<div id="insertebxcodelist" class="section level2">
-<h2 class="hasAnchor">
-<a href="#insertebxcodelist" class="anchor"></a>InsertEBXCodeList()</h2>
+<div class="section level2">
+<h2 id="insertebxcodelist">InsertEBXCodeList()<a class="anchor" aria-label="anchor" href="#insertebxcodelist"></a>
+</h2>
 <p><code><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList()</a></code> and <code><a href="../reference/UpdateEBXCodeList.html">UpdateEBXCodeList()</a></code> should be used carefully, because it will change the original data stored in the EBX database. Regardless, this function only can be run by users who are rights to insert and update data in the EBX.</p>
 <p>Currently, <code>faoebx5</code> has not implemmented function to remove data in the EBX, so we can do it only using the EBX user interface.</p>
 <p>The <code><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList()</a></code> function requires a data frame with the new rows that will be inserted. This data frame must contain the same variables/columns of the original table. For instance, the code list <code>FAO_Level1</code> has the following columns: <code>#r names(cl_fao_level1)</code>. Therefore, the new rows will contain these same columns, as we can see in the data frame <code>#cl_faolevel1_new</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R">  <span class="va">cl_faolevel1_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+<code class="sourceCode R">  <span class="va">cl_faolevel1_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
    Identifier <span class="op">=</span> <span class="fl">99999</span>,
    FAO_Code <span class="op">=</span> <span class="fl">7L</span>,
    NameEn <span class="op">=</span> <span class="st">"XXXX_English"</span>,
@@ -143,26 +128,26 @@
  <span class="op">)</span></code></pre></div>
 <p>Once we have created the data frame with the new rows, the next step is to run the function <code><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList()</a></code> specificating the arguments: <code>data</code> with data frame composed by the news rows to be inserted, <code>cl_name</code> the code list name, <code>folder</code> the folder name, <code>branch</code> the branch name, and <code>instance</code> the instance name.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">faoebx5</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">fishstatr</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">faoebx5</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">fishstatr</span><span class="op">)</span>
 <span class="fu"><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList</a></span><span class="op">(</span>data<span class="op">=</span> <span class="va">cl_faolevel1_new</span>,
                   sdmx_codelist_name  <span class="op">=</span> <span class="st">'FAO_Level1'</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="updateebxcodelist" class="section level2">
-<h2 class="hasAnchor">
-<a href="#updateebxcodelist" class="anchor"></a>UpdateEBXCodeList()</h2>
+<div class="section level2">
+<h2 id="updateebxcodelist">UpdateEBXCodeList()<a class="anchor" aria-label="anchor" href="#updateebxcodelist"></a>
+</h2>
 <p><code><a href="../reference/UpdateEBXCodeList.html">UpdateEBXCodeList()</a></code> function works similarly to <code><a href="../reference/InsertEBXCodeList.html">InsertEBXCodeList()</a></code>. Therefore, we have to create a data frame with the data that we desire to update and then specify the code list name, as well as the <code>folder</code> name, <code>branch</code> name, and the <code>instance</code> name. In this example, we just changed the data stored in the column <code>NameEs</code> from <code>XXXX_Es</code> to <code>Name spanish</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"> <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">faoebx5</span><span class="op">)</span>
- <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">fishstatr</span><span class="op">)</span>
+<code class="sourceCode R"> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">faoebx5</span><span class="op">)</span>
+ <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">fishstatr</span><span class="op">)</span>
 <span class="va">cl_faolevel1_new</span><span class="op">$</span><span class="va">NameEs</span> <span class="op">&lt;-</span> <span class="st">'Name spanish'</span> 
 <span class="fu"><a href="../reference/UpdateEBXCodeList.html">UpdateEBXCodeList</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">cl_update</span>,
                   sdmx_codelist_name  <span class="op">=</span> <span class="st">'FAO_Level1'</span><span class="op">)</span></code></pre></div>
 <hr>
 </div>
-<div id="getdatasetdimensions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getdatasetdimensions" class="anchor"></a>GetDatasetDimensions</h2>
+<div class="section level2">
+<h2 id="getdatasetdimensions">GetDatasetDimensions<a class="anchor" aria-label="anchor" href="#getdatasetdimensions"></a>
+</h2>
 <p>Shows the dimensions for a dataset of interest. Defined datasets can be listed using <code><a href="../reference/GetDatasets.html">GetDatasets()</a></code></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"> <span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ReadMetadata.html">ReadMetadata</a></span><span class="op">(</span><span class="op">)</span>
@@ -173,9 +158,9 @@
 <span class="co">#  3:          41         8          13 FAO major fishing area         403       Code</span>
 <span class="co">#  4:         151        30          14            Environment         502       Code </span></code></pre></div>
 </div>
-<div id="getdimensiongroups" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getdimensiongroups" class="anchor"></a>GetDimensionGroups</h2>
+<div class="section level2">
+<h2 id="getdimensiongroups">GetDimensionGroups<a class="anchor" aria-label="anchor" href="#getdimensiongroups"></a>
+</h2>
 <p>Shows the dimension group for a datasets ConceptID. The ConceptID is returned by <code><a href="../reference/GetDatasetDimensions.html">GetDatasetDimensions()</a></code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"> <span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ReadMetadata.html">ReadMetadata</a></span><span class="op">(</span><span class="op">)</span>
@@ -186,9 +171,9 @@
 <span class="co"># 5           5          ECON_CLASS  105         202                         Economic class</span>
 <span class="co"># 6           6          ECON_GROUP  106         203                         Economic group</span></code></pre></div>
 </div>
-<div id="getgroupconnectionids" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getgroupconnectionids" class="anchor"></a>GetGroupConnectionIDs</h2>
+<div class="section level2">
+<h2 id="getgroupconnectionids">GetGroupConnectionIDs<a class="anchor" aria-label="anchor" href="#getgroupconnectionids"></a>
+</h2>
 <p>Takes GetDimensionGroups uses the information from <code><a href="../reference/GetDimensionGroups.html">GetDimensionGroups()</a></code> and returns a list of what I call solutions. A solution documents all possible paths from the parent to the child. In the case of Species, there aretwo solutions: MAJOR-&gt;ORDER-&gt;FAMILY-&gt;ITEM and MAJOR-&gt;ORDER-&gt;ITEM. This is used by <code><a href="../reference/ReadEBXHierarchy.html">ReadEBXHierarchy()</a></code> which resolves the solution.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/GetGroupConnectionIDs.html">GetGroupConnectionIDs</a></span><span class="op">(</span><span class="fl">306</span>,<span class="fl">301</span><span class="op">)</span>
@@ -198,9 +183,9 @@
 <span class="co"># [1] "306" "307" "301"</span></code></pre></div>
 <hr>
 </div>
-<div id="readebxhierarchy" class="section level2">
-<h2 class="hasAnchor">
-<a href="#readebxhierarchy" class="anchor"></a>ReadEBXHierarchy</h2>
+<div class="section level2">
+<h2 id="readebxhierarchy">ReadEBXHierarchy<a class="anchor" aria-label="anchor" href="#readebxhierarchy"></a>
+</h2>
 <p>Returns a desired grouping, in this example Species: MAJOR(306) to ITEM(301). It uses <code><a href="../reference/GetGroupConnectionIDs.html">GetGroupConnectionIDs()</a></code> to discover the solution(s), and then resolves the solution(s) to actual groupings. Levels are combined to provide the final grouping result. The ASFIS code-list has 12751 references.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ReadEBXHierarchy.html">ReadEBXHierarchy</a></span><span class="op">(</span><span class="fl">306</span>,<span class="fl">301</span><span class="op">)</span>
@@ -212,20 +197,20 @@
 <span class="co"># nrow(result)</span>
 <span class="co"># [1] 12751</span></code></pre></div>
 </div>
-<div id="groupaslist" class="section level2">
-<h2 class="hasAnchor">
-<a href="#groupaslist" class="anchor"></a>GroupAsList</h2>
+<div class="section level2">
+<h2 id="groupaslist">GroupAsList<a class="anchor" aria-label="anchor" href="#groupaslist"></a>
+</h2>
 <p>Converts a data frame group (first column: group, second column: member) into a data table, where group appears only once, and members are converted to a list. The is an essential utlity function, for use with applicaitons. It is also used by the library when flattening (combining) multiple levels of hierarchies.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GroupAsList.html">GroupAsList</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,member<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">21</span>,<span class="fl">22</span>,<span class="fl">31</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GroupAsList.html">GroupAsList</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,member<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">21</span>,<span class="fl">22</span>,<span class="fl">31</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#'  group   children</span>
 <span class="co"># 1     1 11, 12, 13</span>
 <span class="co"># 2     2     21, 22</span>
 <span class="co"># 3     3         31</span></code></pre></div>
 </div>
-<div id="getebxhierarchy" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getebxhierarchy" class="anchor"></a>GetEBXHierarchy</h2>
+<div class="section level2">
+<h2 id="getebxhierarchy">GetEBXHierarchy<a class="anchor" aria-label="anchor" href="#getebxhierarchy"></a>
+</h2>
 <p>This a convenience function; same as <code><a href="../reference/ReadEBXHierarchy.html">ReadEBXHierarchy()</a></code> but uses codelist names. The result is resolved to a grouping by <code><a href="../reference/ReadEBXHierarchy.html">ReadEBXHierarchy()</a></code></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"> <span class="fu"><a href="../reference/GetEBXHierarchy.html">GetEBXHierarchy</a></span><span class="op">(</span><span class="st">'CL_FI_SPECIES_MAJOR'</span>, <span class="st">'CL_FI_SPECIES_ITEM'</span><span class="op">)</span>
@@ -235,9 +220,9 @@
 <span class="co"># [1] "  parentID=306, childID=307, sdmxGroupName=HCL_FI_SPECIES_MAJOR_ORDER"</span>
 <span class="co"># [1] "  parentID=307, childID=301, sdmxGroupName=HCL_FI_SPECIES_ORDER_ITEM"</span></code></pre></div>
 </div>
-<div id="readdatasetcodelists" class="section level2">
-<h2 class="hasAnchor">
-<a href="#readdatasetcodelists" class="anchor"></a>ReadDatasetCodelists</h2>
+<div class="section level2">
+<h2 id="readdatasetcodelists">ReadDatasetCodelists<a class="anchor" aria-label="anchor" href="#readdatasetcodelists"></a>
+</h2>
 <p>Reads all information about a dataset’s dimensions and hierarchies and creates an Rdata file.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"> <span class="va">dataset_ID</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/GetDatasets.html">GetDatasets</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>,<span class="st">'Identifier'</span><span class="op">]</span>
@@ -287,31 +272,28 @@
 <span class="co">#  head(get('COUNTRY.CONTINENT.Groups.2')[[2,2]])</span>
 <span class="co">#  [1] "29"  "45"  "24"  "72"  "114" "62"</span></code></pre></div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by Thomas Berger.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Thomas Berger.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>

@@ -1,7 +1,7 @@
 Package: fishstatr
 Type: Package
 Title: fishstatr: an R package to access fishstat reference data from EBX5
-Version: 1.5.3
+Version: 1.5.4
 Authors@R: c(
     person("Thomas", "Berger", email = "thomas.berger@fao.org",  role = c("cre", "aut")))
 Description: The fishstatr package provides statistcal reference data used to build statistical applications using  R.
@@ -17,5 +17,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Encoding: UTF-8

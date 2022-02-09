@@ -2,6 +2,7 @@
 #'
 #' @param metadata FishStat metadata; obtained using \code{\link{ReadMetadata}}
 #' @param timeseries_ID timeseries identifier obtained using \code{\link{GetTimeseries}}
+#' @param folder where the RData file is saved
 #'
 #' @seealso \code{\link{GetDimensionGroups}} and \code{\link{ReadEBXHierarchy}}.
 #'
@@ -21,7 +22,7 @@
 #' @export
 #'
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
-ReadDatasetCodelists <- function(metadata, timeseries_ID) {
+ReadDatasetCodelists <- function(metadata, timeseries_ID, folder = ".") {
 
   if (!is.list(metadata) || length(names(metadata))!=13) {
     stop('metadata is not valid for FishStat')
@@ -34,6 +35,10 @@ ReadDatasetCodelists <- function(metadata, timeseries_ID) {
 
   if (nrow(timeseries[timeseries$Identifier == timeseries_ID,]) == 0) {
     stop('timeseries_ID=<',timeseries_ID,'> is not defined in FishStat.Timeseries')
+  }
+
+  if (!file.exists(folder)) {
+    stop('folder=<',folder,'> does not exist in the working directory')
   }
 
   # Timeseries
@@ -127,6 +132,6 @@ ReadDatasetCodelists <- function(metadata, timeseries_ID) {
   }
 
   print(paste0('=== saved ',length(objectlist),' to ',datasetName,'.RData, size=', sum(sapply(objectlist,function(x){object.size(get(x))})) ))
-  save(list=objectlist, file = paste0('Timeseries_',timeseries_ID,'.RData'))
+  save(list=objectlist, file = paste0(folder,'/Timeseries_',timeseries_ID,'.RData'))
 }
 
