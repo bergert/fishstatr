@@ -14,7 +14,7 @@ options(width = 95)
 
 # fishstatR  <img src="man/figures/FishStat.png" align="right" alt="" width="120" />
 
-The `fishstatR` package provides reference data from an [EBX5 database] ready to use for applications. For communication with EBX5 it uses the package [faoebx5]. For statisticians, it allows to have access to up-to-date reference data; inlcuding for shiny applications.
+The `fishstatR` package created by Thomas Berger provides reference data from an [EBX5 database] ready to use for applications. For communication with EBX5 it uses the package [faoebx5]. For statisticians, it allows to have access to up-to-date reference data; inlcuding for shiny applications.
 
 ## Installation
 
