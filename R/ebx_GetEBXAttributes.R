@@ -33,7 +33,7 @@ GetEBXAttributes <- function(connection = NA) {
 
   #-- check if the ebx5.attrib_data is loaded already
   ebx5.attrib_data <- get("ebx5.attrib_data", envir = ebx5_env)
-  if(is.null(ebx5.attrib_data) || is.na(ebx5.attrib_data)) {
+  if(is.null(ebx5.attrib_data) || all(is.na(ebx5.attrib_data))) {
     ebx5.attrib_data <- EBXRead(
       branch = connection$meta_branch,
       instance = connection$meta_instance,

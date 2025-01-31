@@ -33,7 +33,7 @@ GetEBXCodeLists <- function(connection = NA) {
 
   #-- check if the ebx5.cl_data is loaded already
   ebx5.cl_data <- get("ebx5.cl_data", envir = ebx5_env)
-  if(is.null(ebx5.cl_data) || is.na(ebx5.cl_data)) {
+  if(is.null(ebx5.cl_data) || all(is.na(ebx5.cl_data))) {
     ebx5.cl_data <- EBXRead(
       branch = connection$meta_branch,
       instance = connection$meta_instance,

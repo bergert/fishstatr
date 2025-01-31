@@ -11,9 +11,8 @@
 #'
 #' @author Thomas Berger, \email{thomas.berger@fao.org}
 getEbxConnection <- function() {
-
   connection <- get("ebx5.connection", envir = ebx5_env)
-  if(is.null(connection) || is.na(connection)) {
+  if(is.null(connection) || all(is.na(connection))) {
     connection <- GetEBXConnection()
     if (is.null(connection)) {
       stop('Cannot load connection; run faoebx5::SetupEBXConnection()')

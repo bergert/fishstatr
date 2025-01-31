@@ -31,7 +31,7 @@ GetEBXGroups <- function(connection = NA) {
 
   #-- check if the ebx5.gr_data is loaded already
   ebx5.gr_data <- get("ebx5.gr_data", envir = ebx5_env)
-  if(is.null(ebx5.gr_data) || is.na(ebx5.gr_data)) {
+  if(is.null(ebx5.gr_data) || all(is.na(ebx5.gr_data))) {
     ebx5.gr_data <- EBXRead(
       branch = connection$meta_branch,
       instance = connection$meta_instance,
